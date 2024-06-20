@@ -1,13 +1,14 @@
-import espress from "express";
-import  './config/config.js'
+import express from "express";
+import { AuthenticateRouterLogin } from './routes/AuthLogin.routes.js';
+import { AuthenticateRouterRegister } from './routes/AuthRegister.routes.js';
+import  './config/config.js';
+// import './models/index.js';
+const PORT = process.env.PORT || 3000;
+const app = express();
 
-const PORT = process.env.PORT || 5000
-const app = espress();
-
-
-app.get('/', ( req , res ) => {
-    res.send('Hola mundo')
-})
+app.use(express.json())
+app.use('/auth/login', AuthenticateRouterLogin)
+app.use('/auth/register', AuthenticateRouterRegister)
 
 app.listen(PORT , ()=>{
     console.log(`server run in port : http://localhost:${PORT}`);
