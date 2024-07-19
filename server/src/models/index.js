@@ -1,4 +1,5 @@
 import { Patient } from "./Patient.js";
+import { Specialties } from './Specialties.js'
 
 
 
@@ -7,3 +8,4 @@ import { Patient } from "./Patient.js";
 
 // INICIALIZACIONES
 Patient.sync();
+Specialties.sync();
