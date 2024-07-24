@@ -1,5 +1,5 @@
 import express from "express";
-import { getOneSpecialties, getAllSpecialties, CreateSpecialties } from "../controllers/Specialties.controllers.js";
+import { getOneSpecialties, getAllSpecialties, CreateSpecialties, updateSpecialties, deleteSpecialties } from "../controllers/Specialties.controllers.js";
 export const SpecialtiesRouterRegister = express.Router();
 
 
@@ -11,3 +11,9 @@ SpecialtiesRouterRegister.get('/', getAllSpecialties)
 
 //CREATE SPECIALTIES
 SpecialtiesRouterRegister.post('/', CreateSpecialties)
+
+//UPDATE SPECIALTIES
+SpecialtiesRouterRegister.put('/:id', updateSpecialties)
+
+//DELETE SPECUALTIES
+SpecialtiesRouterRegister.delete('/:id', deleteSpecialties)
