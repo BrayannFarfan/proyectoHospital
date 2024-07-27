@@ -4,8 +4,8 @@ import { Medic } from './Medic.js'
 
 
 //RELACIONES
-Specialties.hasMany(Medic, { foreignKey: 'specialtyId' })
-Medic.belongsTo(Specialties, { foreignKey: 'specialtyId' }) 
+Specialties.hasMany(Medic)
+Medic.belongsTo(Specialties) 
 
 
 
