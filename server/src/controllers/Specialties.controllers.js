@@ -1,4 +1,4 @@
-
+import { Medic } from '../models/Medic.js'
 import { Specialties } from '../models/Specialties.js'
 
 
@@ -7,7 +7,13 @@ export const getOneSpecialties = async ( req , res ) =>{
 
         try {
             
-            const getOneSpecialties = await Specialties.findByPk(id)
+            const getOneSpecialties = await Specialties.findByPk(id,{
+                include:[
+                    {
+                        model: Medic
+                    }
+                ]
+            })
 
             if(!getOneSpecialties){
                 return res.status( 402 ).json({ message: `la especialidad no existe` })
