@@ -10,7 +10,8 @@ export const getOneSpecialties = async ( req , res ) =>{
             const getOneSpecialties = await Specialties.findByPk(id,{
                 include:[
                     {
-                        model: Medic
+                        model: Medic,
+                        as: "medics"
                     }
                 ]
             })
@@ -30,7 +31,14 @@ export const getOneSpecialties = async ( req , res ) =>{
 export const getAllSpecialties = async ( req , res ) =>{
 
     try {
-        const getAllSpecialties  = await Specialties.findAll();
+        const getAllSpecialties  = await Specialties.findAll({
+            include:[
+                {
+                    model: Medic,
+                    as: "medics"
+                }
+            ]
+        });
         return res.status( 200 ).json({ data : getAllSpecialties })
     } catch ( error ) {
         return res.status( 500 ).json({ message: error })

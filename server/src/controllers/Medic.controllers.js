@@ -10,7 +10,8 @@ export const getOneMedic = async ( req , res ) =>{
         const getOneMedic = await Medic.findByPk(id,{
             include:[
                 {
-                    model: Specialties
+                    model: Specialties,
+                    as: "specialty"
                 }
             ]
         })
@@ -48,13 +49,14 @@ export const CreateMedic = async ( req , res ) =>{
         const findSpecialty = await Specialties.findOne({ where: { id: specialtyId}})
         if(!findSpecialty) return res.status( 400 ).json({ message: `La especialidad ${ specialtyId } no existe`})
 
+console.log(findSpecialty);
 
 
             const createMedic = await Medic.create({
                 name,
                 lastName,
                 cardMedic,
-                specialtyId : findSpecialty.dataValues.id
+                specialtyId : findSpecialty.id
             })
             await createMedic.save()
             return res.status( 200 ).json({ data : createMedic})
