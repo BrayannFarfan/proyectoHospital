@@ -1,7 +1,7 @@
 
 
 
-export const WelcomeMessage = ({ userType }) =>{
+export const WelcomeMessage = () =>{
 
     const content = {
         patient: {
@@ -16,8 +16,8 @@ export const WelcomeMessage = ({ userType }) =>{
     
       return (
         <div>
-          <h1>{content[userType].title}</h1>
-          <p>{content[userType].description}</p>
+          <h1>{content.title}</h1>
+          <p>{content.description}</p>
         </div>
       );
 }

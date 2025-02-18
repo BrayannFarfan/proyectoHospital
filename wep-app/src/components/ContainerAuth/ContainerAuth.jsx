@@ -7,10 +7,7 @@ import { LoginForm } from "./LoginForm";
 
 
 
-
 export const ContainerAuth = () =>{
-
-    const [ userType , setUserType ] = useState('patient')
 
 
     return (
@@ -32,23 +29,9 @@ export const ContainerAuth = () =>{
                     </div>
                 </article>
                 <article className="content_auth_right">
-                    <div>
-                        <button
-                        onClick={()=>setUserType('patient')}
-                        >
-                            Patient
-                        </button>
-                    </div>
-                    <div>
-                        <button
-                        onClick={() =>{setUserType('doctor')}}
-                        >
-                            Doctors
-                        </button>
-                    </div>
+                    {/* <WelcomeMessage /> */}
+                    <LoginForm />
                 </article>
-                <WelcomeMessage userType={userType}/>
-                <LoginForm/>
             </section>
         </>
     )
