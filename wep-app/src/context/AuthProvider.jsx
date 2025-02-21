@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 
 const AuthContext = createContext()
@@ -7,6 +7,25 @@ export const AuthProvider = ({children}) =>{
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        const expiration = localStorage.getItem('expiration');
+
+        if (storedUser && expiration) {
+            const now = new Date().getTime();
+            if (now > parseInt(expiration, 10)) {
+                localStorage.removeItem('user');
+                localStorage.removeItem('expiration');
+                setUser(null);
+            } else {
+                setUser(JSON.parse(storedUser));
+            }
+        }
+        setLoading(false);
+    }, []);
+
 
     const login = async ( credentials ) =>{
         setLoading(true);
@@ -23,8 +42,12 @@ export const AuthProvider = ({children}) =>{
             
 
             const userData = await response.json();
-            setUser(userData)
+            const expirationTime = new Date().getTime() + 3 * 24 * 60 * 60 * 1000;
+       
             localStorage.setItem('user', JSON.stringify(userData))
+            localStorage.setItem('expiration', expirationTime.toString()); 
+
+            setUser(userData)
             return true; 
             
         } catch (error) {
@@ -34,9 +57,12 @@ export const AuthProvider = ({children}) =>{
             setLoading(false);
           }
     }
+
+
     const logout = async ( ) =>{
         setUser(null)
-        localStorage.removeItem('user')
+        localStorage.removeItem('user');
+        localStorage.removeItem('expiration');
     }
 
 

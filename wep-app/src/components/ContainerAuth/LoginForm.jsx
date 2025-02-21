@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { InputContent } from "../ContainerInput/InputContent";
-import { Link, useNavigate } from 'react-router'
-import { useAuth } from '../../context/AuthProvider'
+import { Link, useNavigate } from 'react-router';
+import { useAuth } from '../../context/AuthProvider';
+import { LoginFailedModal } from '../LoginFailedModal/LoginFailedModal';
+import './loginForm.css'
 
 
 
@@ -10,6 +12,7 @@ export const LoginForm = () => {
     const [ email , setEmail] = useState('')
     const [ password , setPassword] = useState('')
     const { login, loading, error } = useAuth()
+    const [ isModalOpen , setIsModal ] = useState(false)
     let navigate = useNavigate();
 
 
@@ -17,38 +20,57 @@ export const LoginForm = () => {
         e.preventDefault();
         const success = await login({ email , password })
         if (success) {
-            navigate('/dashboard-patient');
+            navigate('/');
         } else {
-            console.log("Error al iniciar sesión");
-            TODO:'MOSTRAR AL USUARIO ALGO'
+            setIsModal(true);
         }
     }
 
-
+    function onClose (){
+        setIsModal(false)
+        setEmail('')
+        setPassword('')
+    }
 
     return (
 
         <>
-        <form 
-            onSubmit={handleSubmit}
-         >
-            <div>
-                <label> Email Adress</label>
-                <InputContent type={'text'} placeholder={'Email'} value={email} onChange={(e) => setEmail(e.target.value)}/>
-            </div>
-            <div>
-                <label> Password</label>
-                <InputContent type={'password'} placeholder={'Password'} value={password} onChange={(e) =>setPassword(e.target.value)}/>
-            </div>
-            <button type="submit" disabled={loading}>
-                {
-                    loading ? 'Cargando....' : 'Sign in'
-                }                    
-            </button>
-            <p>
-                 Don't have an account? <Link to={'/register-user'}>Sign up</Link>
-            </p>
-        </form>
+        <section className="login_container">
+            <h2>Welcome back</h2>
+            <p>Log in to your account and we'll get you in to see our doctors</p>
+            <form 
+                
+                onSubmit={handleSubmit}
+                >
+                <div className="input_group">
+                    <label> Email Adress</label>
+                    <InputContent 
+                        type={'text'}
+                        placeholder={'Email'} 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)}/>
+                </div>
+                <div className="input_group">
+                    <label> Password</label>
+                    <InputContent type={'password'} placeholder={'Password'} value={password} onChange={(e) =>setPassword(e.target.value)}/>
+                    <Link 
+                    to={'/forgot-password'}
+                    className="forgot_password"
+                    >
+                        Forgot Password?
+                    </Link>
+                </div>
+                <button type="submit" disabled={loading}>
+                    {
+                        loading ? 'Cargando....' : 'Sign in'
+                    }                    
+                </button>
+                <p className="signup_link">
+                    Don't have an account? <Link to={'/register-user'}>Sign up</Link>
+                </p>
+            </form>
+            <LoginFailedModal isOpen={ isModalOpen} onClose={onClose} />
+        </section>
         </>
     )
 }
