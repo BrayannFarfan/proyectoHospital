@@ -1,0 +1,33 @@
+
+
+.header_container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100px;
+    background: #ffffff;
+    box-shadow: -4px 10px 8px -5px rgba(165, 188, 195, 0.92);
+}
+.header_link{
+    text-decoration: none;
+    color: #666;
+    font-size: 15px;
+}
+.header_link:hover{
+    color: #2CB0A5;
+}
+.header_container nav ul{
+    display:  flex;
+    gap: 2rem;
+}
+.header_container nav ul li {
+    list-style: none;
+}
+.header_container div h1{
+    color: #666;
+    font-size: 2rem;
+}
+.header_container div h1 span{
+    color: #2CB0A5;
+    text-transform: uppercase;
+}
