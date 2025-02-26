@@ -14,7 +14,7 @@ export const AuthLogin = async ( req , res ) =>{
 
         if( !passCompared){ return res.status( 402 ).json({ message: `El password es incorrecto` })}
 
-        return res.status(200).json({message: `Success`})
+        return res.status(200).json({data: getUser})
         
     } catch (error) {
         return res.status(500).json({message: error})

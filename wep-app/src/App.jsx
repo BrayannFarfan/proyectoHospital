@@ -13,7 +13,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home/>}/>
             <Route path='/login-user' element={<ContainerAuth/>}  />
-            <Route path='/dashboard-patient' element={ user && <DashboardPatient/> }/>
+            {/* <Route path='/dashboard-patient' element={ user && <DashboardPatient/> }/> */}
           </Routes>
     </>
   )

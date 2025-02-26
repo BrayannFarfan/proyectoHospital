@@ -31,3 +31,11 @@
     color: #2CB0A5;
     text-transform: uppercase;
 }
+.Header_login{
+    background: #2CB0A5;
+    padding: 10px 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #ffffff;
+    border-radius: 35px;
+}

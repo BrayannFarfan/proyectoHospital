@@ -1,11 +1,13 @@
 import { Link } from "react-router";
 import './header.css'
+import { Profile } from "../Profile/Profile";
+import { useAuth } from '../../context/AuthProvider';
 
 
 
 export const Header = () => {
 
-
+  const { user } = useAuth()
 
     return(
         <>
@@ -42,6 +44,9 @@ export const Header = () => {
                         </li>
                     </ul>
                 </nav>
+                {
+                    user ? <Profile/> : <Link to={'/login-user'} className="Header_login">Login</Link>
+                }
             </header>
         </>
     )
