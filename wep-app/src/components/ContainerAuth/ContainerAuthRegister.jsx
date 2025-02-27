@@ -1,19 +1,19 @@
 import { PiWarningCircle } from "react-icons/pi";
 import { Ri24HoursLine } from "react-icons/ri";
 import { GiPadlockOpen } from "react-icons/gi";
-import { LoginForm } from "./LoginForm";
-import './container.css';
+import './container.css'
+import { Register } from "../Register/Register";
 
 
 
-export const ContainerAuth = () =>{
+export const ContainerAuthRegister = () =>{
 
 
     return (
         <>
             <section className="container-auth">
                 <article className="content_auth_left">
-                    <h1>Expert advice from <br /> top Doctors</h1>
+                    <h1>Your health in <br /> our hands</h1>
                     <div>
                         <PiWarningCircle className="auth_expert_icon" />
                         <span>Expert advice from top Doctors</span>
@@ -28,7 +28,7 @@ export const ContainerAuth = () =>{
                     </div>
                 </article>
                 <article className="content_auth_right">
-                    <LoginForm />
+                    <Register />
                 </article>
             </section>
         </>

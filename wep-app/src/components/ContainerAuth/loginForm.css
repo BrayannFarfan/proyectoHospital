@@ -77,21 +77,17 @@ button:hover {
 .signup_link a:hover {
     text-decoration: underline;
 }
-/* 
-.login-container::before {
-    content: url('path-to-patient-icon.png'); 
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.login_container::after {
-    content: url('path-to-doctor-icon.png');
-    display: inline-block;
-    margin-left: 10px;
-} */
 .forgot_password{
     display: flex;
     justify-content: end;
     margin-top: 1.2rem;
     color: #666;
 }
+.register_form{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
+

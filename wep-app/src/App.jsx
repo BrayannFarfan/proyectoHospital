@@ -1,8 +1,8 @@
 import { Routes , Route, Navigate } from 'react-router';
 import { ContainerAuth } from './components/ContainerAuth/ContainerAuth';
 import { useAuth } from './context/AuthProvider'
-import { DashboardPatient } from './Page/DashboardPatient/DashboardPatient.jsx'
 import { Home } from './Page/home/home.jsx'
+import { ContainerAuthRegister } from './components/ContainerAuth/ContainerAuthRegister.jsx';
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home/>}/>
             <Route path='/login-user' element={<ContainerAuth/>}  />
-            {/* <Route path='/dashboard-patient' element={ user && <DashboardPatient/> }/> */}
+            <Route path='/register-user' element={<ContainerAuthRegister/>}  />
           </Routes>
     </>
   )

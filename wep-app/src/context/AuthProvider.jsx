@@ -65,11 +65,41 @@ export const AuthProvider = ({children}) =>{
         localStorage.removeItem('expiration');
     }
 
+    const register = async ( registrations ) =>{
+        setLoading(true);
+        setError(null);
 
+        try {
+            const response  = await fetch('http://localhost:3000/auth/register', {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify( registrations ),
+            })
+            if (!response.ok) throw new Error('Error al registrarse');
+
+            const userData = await response.json();
+            const expirationTime = new Date().getTime() + 3 * 24 * 60 * 60 * 1000;
+       
+            localStorage.setItem('user', JSON.stringify(userData))
+            localStorage.setItem('expiration', expirationTime.toString()); 
+
+            setUser(userData)
+            return true; 
+            
+
+        } catch (error) {
+            setError(error.message);
+            return false;
+        }finally{
+            setLoading(false);
+        }
+    }
 
     return (
         <AuthContext.Provider
-            value={{login, user, logout, loading, error }}
+            value={{login, user, logout, loading, error, register }}
         >
 
             {children}

@@ -3,7 +3,8 @@ import { InputContent } from "../ContainerInput/InputContent";
 import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../../context/AuthProvider';
 import { LoginFailedModal } from '../LoginFailedModal/LoginFailedModal';
-import './loginForm.css'
+import './loginForm.css';
+import { WelcomeMessage } from "../WelcomeMessage/WelcomeMessage";
 
 
 
@@ -36,8 +37,10 @@ export const LoginForm = () => {
 
         <>
         <section className="login_container">
-            <h2>Welcome back</h2>
-            <p>Log in to your account and we'll get you in to see our doctors</p>
+            <WelcomeMessage 
+                    title="Welcome Back" 
+                    description="Log in to your account and we'll get you in to see our doctors."
+            />
             <form 
                 
                 onSubmit={handleSubmit}

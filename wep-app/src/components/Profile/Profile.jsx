@@ -11,7 +11,7 @@ export const Profile = () => {
     const [ isOpen , setIsOpen ] = useState(false)
     const { user , logout } = useAuth()
     let navigate = useNavigate();
-
+    
 
     function   handleToggleDropdown () {
         setIsOpen(!isOpen)

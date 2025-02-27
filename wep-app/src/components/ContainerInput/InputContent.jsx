@@ -1,5 +1,5 @@
 
-export const InputContent = ({type , placeholder, onChange, value}) =>{
+export const InputContent = ({type , placeholder, onChange, value, name}) =>{
 
 
 
@@ -12,6 +12,7 @@ export const InputContent = ({type , placeholder, onChange, value}) =>{
                 onChange={onChange}
                 className="input_content"
                 value={value}
+                name={name}
             />
             </div>
         </>
