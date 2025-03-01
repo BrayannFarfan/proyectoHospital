@@ -97,9 +97,58 @@ export const AuthProvider = ({children}) =>{
         }
     }
 
+    const forgotPassword = async ( email ) => {
+        
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response  = await fetch('http://localhost:3000/forgot-password', {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify( { email } ),
+            })
+            if (!response.ok) throw new Error('Error al enviar');
+            return true; 
+        } catch (error) {
+            setError(error.message);
+            return false;
+        }finally{
+            setLoading(false);
+        }
+    }
+
+    const resetPassword = async ( email, newPassword) => {
+        setLoading(true);
+        setError(null);
+        try {
+          const response = await fetch('http://localhost:3000/reset-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ newPassword, email }),
+          });
+          const data = await response.json();
+          console.log(data);
+          
+          if (!response.ok) throw new Error(data.message || 'Reset password failed');
+          return data;
+        } catch (err) {
+          setError(err.message);
+          throw err;
+        } finally {
+          setLoading(false);
+        }
+      };
+    
+
+
+
+
     return (
         <AuthContext.Provider
-            value={{login, user, logout, loading, error, register }}
+            value={{login, user, logout, loading, error, register, forgotPassword, resetPassword }}
         >
 
             {children}
