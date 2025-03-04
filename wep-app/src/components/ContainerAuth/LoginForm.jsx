@@ -12,26 +12,44 @@ export const LoginForm = () => {
 
     const [ email , setEmail] = useState('')
     const [ password , setPassword] = useState('')
-    const { login, loading, error } = useAuth()
-    const [ isModalOpen , setIsModal ] = useState(false)
+    const { login, loading, error} = useAuth()
     let navigate = useNavigate();
+    const [isErrorModalOpen, setIsErrorModal] = useState(false); 
+    const [isSuccessModalOpen, setIsSuccessModal] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
 
     const handleSubmit =  async (e) =>{
         e.preventDefault();
-        const success = await login({ email , password })
+    if (!email || !password) {
+        setErrorMessage('Please enter both email and password.');
+        setIsErrorModal(true);
+        return;
+      }
+  
+      try {
+        const success = await login({ email, password });
         if (success) {
-            navigate('/');
-        } else {
-            setIsModal(true);
+          setIsSuccessModal(true);
+        }else{
+            setErrorMessage('Invalid email or password. Please try again.')
+            setIsErrorModal(true)
         }
+      } catch (error) {
+        setIsErrorModal(true);
+      }
     }
 
-    function onClose (){
-        setIsModal(false)
+    function onCloseError (){
+        setIsErrorModal(false)
         setEmail('')
         setPassword('')
     }
+
+    const onCloseSuccess = () => {
+        setIsSuccessModal(false);
+        navigate('/'); 
+      };
 
     return (
 
@@ -72,7 +90,23 @@ export const LoginForm = () => {
                     Don't have an account? <Link to={'/register-user'}>Sign up</Link>
                 </p>
             </form>
-            <LoginFailedModal isOpen={ isModalOpen} onClose={onClose} />
+            <LoginFailedModal 
+                isOpen={ isErrorModalOpen} 
+                onClose={onCloseError} 
+                title="Login Failed"
+                message={errorMessage}
+                primaryButtonText="Try Again"   
+            />
+
+            <LoginFailedModal 
+                isOpen={ isSuccessModalOpen} 
+                onClose={onCloseSuccess} 
+                title="Login Succeses"
+                message="Welcome"
+                primaryButtonText="Close"   
+            />
+
+
         </section>
         </>
     )

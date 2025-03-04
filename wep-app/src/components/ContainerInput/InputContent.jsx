@@ -13,6 +13,7 @@ export const InputContent = ({type , placeholder, onChange, value, name}) =>{
                 className="input_content"
                 value={value}
                 name={name}
+                // required
             />
             </div>
         </>

@@ -1,7 +1,7 @@
 import './LoginFailedModal.css'
 
 
-export  const LoginFailedModal = ({ isOpen , onClose }) => {
+export  const LoginFailedModal = ({ isOpen , onClose, title, message, primaryButtonText, onPrimaryButtonClick }) => {
     if ( !isOpen )return null
 
 
@@ -9,9 +9,15 @@ export  const LoginFailedModal = ({ isOpen , onClose }) => {
         <>
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h2>Login Failed</h2>
-            <p>Invalid email or password. Please try again.</p>
-            <button onClick={onClose}>Close</button>
+            <h2>{title}</h2>
+            <p>{message}</p>
+            <div className="modal-buttons">
+                {primaryButtonText && (
+                <button onClick={onPrimaryButtonClick || onClose}>
+                    {primaryButtonText}
+                </button>
+                )}    
+            </div>
         </div>
     </div>
         </>

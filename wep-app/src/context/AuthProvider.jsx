@@ -38,10 +38,10 @@ export const AuthProvider = ({children}) =>{
                 },
                 body: JSON.stringify(credentials),
             })
-            if (!response.ok) throw new Error('Error de autenticación');
             
-
             const userData = await response.json();
+            if (!response.ok) throw new Error( 'Authentication error, try again.');
+            
             const expirationTime = new Date().getTime() + 3 * 24 * 60 * 60 * 1000;
        
             localStorage.setItem('user', JSON.stringify(userData))
@@ -77,8 +77,8 @@ export const AuthProvider = ({children}) =>{
                 },
                 body: JSON.stringify( registrations ),
             })
-            if (!response.ok) throw new Error('Error al registrarse');
-
+            
+            if (!response.ok) throw new Error(userData.message || 'Error al registrarse');
             const userData = await response.json();
             const expirationTime = new Date().getTime() + 3 * 24 * 60 * 60 * 1000;
        

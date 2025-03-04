@@ -12,6 +12,13 @@ import { WelcomeMessage } from "../WelcomeMessage/WelcomeMessage";
 
 export const Register = () =>{
 
+    const [isErrorModalOpen, setIsErrorModal] = useState(false); 
+    const [isSuccessModalOpen, setIsSuccessModal] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
+    const { register, loading } = useAuth()
+    let navigate = useNavigate();
+
+
     const [formData, setFormData] = useState({
         name: '',
         lastName: '',
@@ -22,13 +29,11 @@ export const Register = () =>{
         address: '', 
       });
 
-    const [ isModalOpen , setIsModal ] = useState(false);
-    const { register, loading } = useAuth()
-    let navigate = useNavigate();
 
 
-    function onClose (){
-        setIsModal(false)
+
+    function onCloseError (){
+        setIsErrorModal(false)
         setFormData({
             name: '',
             lastName: '',
@@ -40,6 +45,10 @@ export const Register = () =>{
         })
     }
 
+    const onCloseSuccess = () => {
+        setIsSuccessModal(false);
+        navigate('/'); 
+      };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -52,12 +61,26 @@ export const Register = () =>{
 
       const handleSubmitRegistration =  async (e) =>{
         e.preventDefault();
-         const success = await register(formData)
-        if (success) {
-            navigate('/');
-        } else {
-            setIsModal(true);
-        }
+        if ( !formData.address || !formData.email || !formData.greenCard || !formData.lastName || !formData.name || !formData.password || !formData.phone ) {
+            setErrorMessage('Please enter both email and password.');
+            setIsErrorModal(true);
+            return;
+          }
+
+          try {
+            const success = await register(formData)
+            if (success) {
+                setIsSuccessModal(true); 
+            }else{
+                setErrorMessage('An error occurred during registration.')
+                setIsErrorModal(true)
+            }
+          } catch (error) {
+            setErrorMessage(error.message || 'An error occurred during registration.');
+            setIsErrorModal(true);
+          }
+         
+        
     }
 
     return(
@@ -150,7 +173,20 @@ export const Register = () =>{
                         You have an account? <Link to={'/login-user'}>Sign in</Link>
                     </p>
                 </form>
-            <LoginFailedModal isOpen={ isModalOpen} onClose={onClose} />
+            <LoginFailedModal 
+                isOpen={ isSuccessModalOpen} 
+                onClose={onCloseSuccess} 
+                title='Register Succeses'
+                message={errorMessage}
+                primaryButtonText="Close"  
+            />
+             <LoginFailedModal 
+                isOpen={ isErrorModalOpen} 
+                onClose={onCloseError} 
+                title="Register Failed"
+                message={errorMessage}
+                primaryButtonText="Try Again"   
+            />
         </section>
         </>
     )
