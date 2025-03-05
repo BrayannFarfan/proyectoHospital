@@ -1,0 +1,107 @@
+
+
+
+
+
+
+.hero-section {
+    height: 91vh;
+    background: url(../../assets/h1_hero.jpg) no-repeat top;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 50px;
+    box-sizing: border-box;
+  }
+  
+  .hero-content {
+    z-index: 1;
+    text-align: left;
+    width: 70%;
+  }
+  
+  .hero-content h3 {
+    color: #2CB0A5;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .hero-content h1 {
+    font-size: 7rem;
+    font-weight: 900;
+    color: #333;
+    margin: 0;
+    line-height: 1.2;
+    display: block;
+  }
+  
+  .hero-content .dynamic-word {
+    color: #2CB0A5;
+    margin-left: 10px;
+  }
+  
+  .hero-content p {
+    color: #666;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    margin: 20px 0;
+    max-width: 50%;
+  }
+  
+  .appointment-btn {
+    background-color: #2CB0A5;
+    color: white;
+    width: 10%;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+    text-decoration: none;
+  }
+  
+  .appointment-btn:hover {
+    background-color: #2a8d84;
+  }
+  
+  .appointment-btn span {
+    margin-left: 5px;
+  }
+  
+  
+  /* Importa los estilos del WordSwap */
+  .word-container {
+    display: inline-block;
+  }
+  
+  .word {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #333;
+    animation: fadeInOut 2s infinite;
+  }
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }

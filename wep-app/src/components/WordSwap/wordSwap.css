@@ -1,0 +1,25 @@
+.word-container {
+    display: inline-block;
+  }
+  
+  .word {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #333;
+    animation: fadeInOut 2s infinite;
+  }
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
