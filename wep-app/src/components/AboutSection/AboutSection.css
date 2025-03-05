@@ -1,0 +1,90 @@
+/* src/components/AboutSection.css */
+.about-section {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-content {
+  z-index: 1;
+  max-width: 20%;
+  text-align: left;
+}
+
+.about-content h3 {
+  color: #2CB0A5;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.about-content h1 {
+  font-size: 5rem;
+  font-weight: 900;
+  color: #333;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+}
+
+.about-content p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  background-color: #2CB0A5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 200px;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+
+.btn span {
+  margin-left: 5px;
+}
+
+.about-images {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.image-top {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  height: auto;
+  z-index: 1;
+  box-shadow: -5px 5px 10px rgba(4, 4, 4, 0.1);
+}
+
+.image-bottom {
+  position: relative;
+  width: 50%;
+  z-index: 0;
+  box-shadow: -5px 5px 10px rgba(4, 4, 4, 0.1);
+}
