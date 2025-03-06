@@ -77,10 +77,7 @@
   .appointment-btn span {
     margin-left: 5px;
   }
-  
-  
-  /* Importa los estilos del WordSwap */
-  .word-container {
+.word-container {
     display: inline-block;
   }
   

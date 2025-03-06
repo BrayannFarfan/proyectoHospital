@@ -1,0 +1,153 @@
+.most-viewed-doctors {
+    padding: 40px 50px;
+    /* background-color: #fff; */
+    text-align: center;
+  }
+  .container_doctor{
+    text-decoration: none;
+    color: #666;
+  }
+  .most-viewed-doctors h2 {
+    font-size: 2rem;
+    color: #2CB0A5;
+    margin-bottom: 10px;
+  }
+  
+  .most-viewed-doctors p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+  
+  .doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 6rem auto;
+  }
+  
+  .doctor-card {
+    background: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  
+  .doctor-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .doctor-image {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+  }
+  
+  .doctor-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .heart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #2CB0A5;
+    font-size: 1.2rem;
+  }
+  
+  .doctor-info {
+    padding: 15px;
+    text-align: left;
+  }
+  
+  .doctor-info h3 {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 0 5px 0;
+  }
+  
+  .doctor-info h4 {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 0 0 10px 0;
+  }
+  
+  .doctor-info p {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0 0 10px 0;
+  }
+  
+  .rating {
+    font-size: 0.9rem;
+    color: #ff9800;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+  }
+  
+  .rating span {
+    color: #666;
+    margin-left: 5px;
+  }
+  
+  .views {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .book-btn {
+    background-color: #2CB0A5;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 20%;
+    transition: background-color 0.3s;
+    text-decoration: none;
+  }
+  
+  .book-btn:hover {
+    background-color: #2a8079;
+  }
+  
+  .view-all-btn {
+    background-color: #2CB0A5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    top: 40px;
+    transition: background-color 0.3s;
+    width: 10%;
+    text-decoration: none;
+  }
+  
+  .view-all-btn:hover {
+    background-color: #2a8079;
+  }
+  .doctor_search{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .doctor_map{
+    text-decoration: none;
+    color: #666;
+
+  }
+  .doctor_map:hover{
+    text-decoration: underline;
+  }

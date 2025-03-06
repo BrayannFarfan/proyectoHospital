@@ -5,6 +5,7 @@ const AuthContext = createContext()
 
 export const AuthProvider = ({children}) =>{
     const [user, setUser] = useState(null);
+    const [ doctor , setDoctor ] = useState([])
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -140,11 +141,7 @@ export const AuthProvider = ({children}) =>{
         } finally {
           setLoading(false);
         }
-      };
-    
-
-
-
+    };
 
     return (
         <AuthContext.Provider
