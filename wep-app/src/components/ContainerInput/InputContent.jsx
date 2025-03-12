@@ -1,5 +1,5 @@
 
-export const InputContent = ({type , placeholder, onChange, value, name}) =>{
+export const InputContent = ({type , placeholder, onChange, value, name, readOnly,required,onClick}) =>{
 
 
 
@@ -13,7 +13,8 @@ export const InputContent = ({type , placeholder, onChange, value, name}) =>{
                 className="input_content"
                 value={value}
                 name={name}
-                // required
+                readOnly={readOnly}
+                onClick={onClick}
             />
             </div>
         </>

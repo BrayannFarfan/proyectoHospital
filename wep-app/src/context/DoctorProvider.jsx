@@ -6,6 +6,8 @@ export const DoctorProvider = ({ children }) => {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [specialties, setSpecialties] = useState([]);
+  const [selectedSpecialty, setSelectedSpecialty] = useState(null);
 
   const getDoctors = async () => {
     setLoading(true);
@@ -34,12 +36,48 @@ export const DoctorProvider = ({ children }) => {
     }
   };
 
+  const getSpecialties = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('http://localhost:3000/specialties/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      setSpecialties(data.data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  const getDoctorsBySpecialty = (specialtyId) => {
+    const specialty = specialties.find((s) => s.id === specialtyId);
+    setSelectedSpecialty(specialty);
+    return specialty ? specialty.doctors || [] : [];
+  };
+
+
+
   useEffect(() => {
     getDoctors();
+    getSpecialties();
   }, []); 
 
   return (
-    <DoctorContext.Provider value={{ doctors, loading, error, getDoctors }}>
+    <DoctorContext.Provider value={{specialties, selectedSpecialty, setSelectedSpecialty, getDoctorsBySpecialty,doctors, loading, error, getDoctors }}>
       {children}
     </DoctorContext.Provider>
   );

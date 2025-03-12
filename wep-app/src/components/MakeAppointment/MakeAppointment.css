@@ -1,0 +1,263 @@
+/* src/components/MakeAppointment.css */
+.make-appointment {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 60px;
+    border-radius: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .appointment-left {
+    flex: 1;
+    padding-right: 40px;
+    color: #1a3c6d; 
+  }
+  
+  .appointment-left h2 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    line-height: 1.2;
+  }
+  
+  .appointment-left p {
+    font-size: 0.875rem; 
+    color: #666666; 
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+  
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+  }
+  
+  .contact-item .icon {
+    font-size: 1.5rem; 
+    color: #007bff;
+  }
+  
+  .contact-item h4 {
+    font-size: 1.1rem; 
+    color: #333333; 
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .contact-item p {
+    font-size: 0.875rem; 
+    color: #666666;
+    margin: 0;
+  }
+  
+  .appointment-right {
+    flex: 1;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .appointment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .form-row input,
+  .form-row select {
+    flex: 1;
+    padding: 10px;
+    font-size: 0.875rem; 
+    border: 1px solid #cccccc; 
+    border-radius: 5px;
+    background-color: #ffffff;
+    outline: none;
+    box-sizing: border-box;
+  }
+  
+  .form-row select {
+    appearance: none;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZmlsbD0iIzY2NiIgZD0iTTEwIDExLjVhMi4xOCAyLjE4IDAgMCAxLTMuMDktMy4wOWEyLjE4IDIuMTggMCAxIDEgMy4wOSAzLjA5em0wIDEuNWEzLjY4IDMuNjggMCAwIDAtNS4xOS01LjE5YTMuNjggMy42OCAwIDAgMCA1LjE5IDUuMTl6bTAgMGE1LjE4IDUuMTggMCAwIDEtNy4yOC03LjI4YTUuMTggNS4xOCAwIDAgMSA3LjI4IDcuMjh6bTAgMGE2LjY4IDYuNjggMCAwIDAtOS4zOC05LjM4YTYuNjggNi42OCAwIDAgMCA5LjM4IDkuMzh6Ii8+PC9zdmc+') no-repeat right 10px center;
+    background-size: 12px;
+    color: #666666; 
+    cursor: pointer;
+  }
+  
+
+  
+  .book-btn {
+    background-color: #2CB0A5; 
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .book-btn:hover {
+    background-color: #2d8a82; 
+  }
+  
+  .doctor-list {
+    margin-top: 10px;
+  }
+  
+  .doctor-list h4 {
+    font-size: 1rem;
+    color: #2CB0A5;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .doctor-choose{
+    appearance: none;
+    color: #666666; 
+    cursor: pointer;
+    width: 100%;
+
+    padding: 10px;
+    font-size: 0.875rem; 
+    border: 1px solid #cccccc; 
+    border-radius: 5px;
+    background-color: #ffffff;
+    outline: none;
+    box-sizing: border-box;
+  }
+
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+  
+  .react-datepicker {
+    font-family: Arial, sans-serif;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .react-datepicker__header {
+    background-color: #ffffff;
+    border-bottom: none;
+    padding: 10px;
+  }
+  
+  .react-datepicker__current-month {
+    font-size: 1rem;
+    color: #333333;
+    font-weight: bold;
+  }
+  
+  .react-datepicker__navigation {
+    top: 10px;
+  }
+  
+  .react-datepicker__navigation--previous,
+  .react-datepicker__navigation--next {
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .react-datepicker__day-name,
+  .react-datepicker__day {
+    width: 2rem;
+    line-height: 2rem;
+    margin: 0.2rem;
+    color: #666666;
+  }
+  
+  .react-datepicker__day-name {
+    font-weight: bold;
+    color: #333333;
+  }
+  
+  .react-datepicker__day--selected,
+  .react-datepicker__day--keyboard-selected {
+    background-color: #2CB0A5; 
+    color: #ffffff;
+    border-radius: 50%;
+  }
+  
+  .react-datepicker__day--today {
+    background-color: #2d8a82;
+    color: #ffffff;
+    border-radius: 50%;
+  }
+  
+
+  .react-datepicker__month-text {
+    margin: 0.4rem;
+  }
+
+.appointment-form .date-picker {
+  width: 100%;
+}
+
+.appointment-form .date-picker:not(:placeholder-shown) {
+  color: #333;
+  font-weight: 400;
+}
+
+.time-input-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.time-input-wrapper .input-content input {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.875rem;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+  outline: none;
+  box-sizing: border-box;
+  color: #666666;
+  cursor: pointer;
+}
+
+.time-input-wrapper .input-content input:focus {
+  border-color: #2CB0A5;
+  background-color: #f8f9fa;
+  color: #333333;
+}
+
+.time-input-wrapper .input-content input:hover {
+  border-color: #0056b3;
+  background-color: #f1f3f5;
+}
+
+.time-picker-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-top: 5px;
+}

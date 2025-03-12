@@ -8,7 +8,7 @@ import { AppointmentRouterRegister } from './routes/Appointment.routes.js';
 import { forgotPasswordSend } from './routes/ForgotPassword.routes.js';
 import { resetPasswordSend } from './routes/resetPasswordSend.routes.js';
 import  './config/config.js';
-// import './models/index.js';
+import './models/index.js';
 const PORT = process.env.PORT || 3000;
 const app = express();
 

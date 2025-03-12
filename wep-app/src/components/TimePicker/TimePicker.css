@@ -1,0 +1,56 @@
+/* src/components/TimePicker.css */
+.time-picker {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  
+  .time-picker-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .arrow-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: #666666;
+    padding: 2px;
+  }
+  
+  .arrow-btn:hover {
+    color: #2CB0A5;
+  }
+  
+  .time-value {
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #0b0b0b;
+    padding: 2px 5px;
+  }
+  
+  .time-separator {
+    font-size: 0.875rem;
+    color: #666666;
+  }
+  
+  .period-btn {
+    background-color: #2CB0A5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .period-btn:hover {
+    background-color: #2b7f78;
+  }

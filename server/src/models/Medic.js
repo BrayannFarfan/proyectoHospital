@@ -10,5 +10,12 @@ export const Medic = db.define('Medic', {
     },
     cardMedic:{
         type: DataTypes.INTEGER
+    },
+    specialtyId: {
+        type: DataTypes.INTEGER,
+        allowNull: false 
     }
+},{
+    tableName: 'medics',
+    timestamps: false
 })

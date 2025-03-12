@@ -14,14 +14,6 @@ Medic.belongsTo(Specialties , {
     foreignKey: "specialtyId",
 }) 
 
-// Specialties.hasMany(Appointment)
-// Appointment.belongsTo(Specialties)
-
-// Patient.hasMany(Appointment)
-// Appointment.belongsTo(Patient)
-
-// Medic.hasMany(Appointment)
-// Appointment.belongsTo(Medic)
 Specialties.hasMany(Appointment, { foreignKey: 'specialtyId' });
 Appointment.belongsTo(Specialties, { foreignKey: 'specialtyId' });
 
@@ -33,8 +25,8 @@ Appointment.belongsTo(Medic, { foreignKey: 'MedicId' });
 
 
 // INICIALIZACIONES
-Specialties.sync();
 Medic.sync();
+Specialties.sync();
 Appointment.sync();
 Patient.sync();
 

@@ -34,7 +34,7 @@ export const MostViewedDoctors = () => {
     <section className="most-viewed-doctors">
       <h2>Most Viewed Doctors</h2>
       <p>
-        Usu habeo equidem no sanctus. Suus sumo id sed, erat erant apporteat cu pri.
+        Discover top doctors, book appointments, and access expert care effortlessly with us.
       </p>
       <DoctorData limit={limit} doctors={paginatedDoctors}/>
       <div className="pagination">

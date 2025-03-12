@@ -34,14 +34,16 @@ export const Header = () => {
                         </li>
                         <li>
                             <Link className="header_link" to={'/departaments'}>
-                                Departaments
+                                Coming Soon
                             </Link>
                         </li>
-                        <li>
+                        {
+                            user && <li>
                             <Link className="header_link" to={'/appointment'}>
                                 Appointment
                             </Link>
                         </li>
+                        }
                     </ul>
                 </nav>
                 {

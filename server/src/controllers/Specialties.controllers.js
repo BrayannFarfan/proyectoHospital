@@ -5,6 +5,9 @@ import { Specialties } from '../models/Specialties.js'
 export const getOneSpecialties = async ( req , res ) =>{
         const { id } = req.params;
 
+        console.log(id);
+        
+
         try {
             
             const getOneSpecialties = await Specialties.findByPk(id,{
