@@ -6,10 +6,16 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { TimePickerContainer } from '../TimePicker/TimePickerContainer';
 import { useDoctor } from '../../context/DoctorProvider';
 import { useAppointment } from '../../context/Appointment';
+import { LoginFailedModal } from '../LoginFailedModal/LoginFailedModal';
+import { useNavigate } from 'react-router';
 
 export const AppointmentForm = () => {
   const { specialties, selectedSpecialty, setSelectedSpecialty, getDoctorsBySpecialty } = useDoctor();
   const { patientId, createAppointment } = useAppointment();
+  const [isErrorModalOpen, setIsErrorModal] = useState(false); 
+  const [isSuccessModalOpen, setIsSuccessModal] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const navigate = useNavigate()
 
   const timeInputRef = useRef(null);
   const timePickerRef = useRef(null);
@@ -47,7 +53,8 @@ export const AppointmentForm = () => {
     e.preventDefault();
 
     if (!patientId) {
-      alert('Error: No se encontró el ID del paciente. Asegúrate de estar logueado.');
+      setErrorMessage('Error: Patient ID not found. Please make sure you are logged in.');
+      setIsErrorModal(true)
       return;
     }
 
@@ -57,14 +64,16 @@ export const AppointmentForm = () => {
     const medicId = selectedDoctor?.id || null;
 
     if (!medicId) {
-      alert('Error: No se encontró el ID del médico. Por favor selecciona un médico.');
+      setErrorMessage('Doctor ID not found. Please select a doctor.');
+      setIsErrorModal(true)
       return;
     }
 
     const specialtyId = selectedSpecialty?.id || null;
 
     if (!specialtyId) {
-      alert('Error: No se encontró el ID de la especialidad. Por favor selecciona una especialidad.');
+      setErrorMessage('Specialty ID not found. Please select a specialty.');
+      setIsErrorModal(true)
       return;
     }
 
@@ -78,9 +87,11 @@ export const AppointmentForm = () => {
 
     try {
       const response = await createAppointment(appointmentData);
-      alert('Appointment booked successfully!');
+      setIsSuccessModal(true);
+      return;
     } catch (error) {
-      alert(`Failed to book appointment: ${error.message}`);
+      setErrorMessage(` ${error.message}`);
+      setIsErrorModal(true)
     }
   };
 
@@ -91,89 +102,113 @@ export const AppointmentForm = () => {
     return `${hours < 10 ? `0${hours}` : hours}:${time.minute < 10 ? `0${time.minute}` : time.minute}`;
   };
 
+  
+  function onCloseError (){
+    setIsErrorModal(false)
+}
+function onCloseSuccess(){
+    setIsSuccessModal(false);
+}
+
   return (
-    <form onSubmit={handleSubmit} className="appointment-form">
-      <div className="form-row">
-        <InputContent
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-        <InputContent
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-row">
-        <InputContent
-          type="tel"
-          name="mobile"
-          placeholder="Your Mobile"
-          value={formData.mobile}
-          onChange={handleChange}
-          required
-        />
-        <select
-          name="specialty"
-          value={selectedSpecialty?.id || ''}
-          onChange={handleSpecialtyChange}
-          required
-        >
-          <option value="" disabled>Choose Specialty</option>
-          {specialties.map((specialty) => (
-            <option key={specialty.id} value={specialty.id}>
-              {specialty.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      {selectedSpecialty && (
-        <div className="doctor-list">
-          <h4>Doctors in {selectedSpecialty.name}</h4>
-          <select
-            name="doctor"
-            value={formData.doctor}
+    <>
+      <form onSubmit={handleSubmit} className="appointment-form">
+        <div className="form-row">
+          <InputContent
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.name}
             onChange={handleChange}
             required
-            className="doctor-choose"
+          />
+          <InputContent
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-row">
+          <InputContent
+            type="tel"
+            name="mobile"
+            placeholder="Your Mobile"
+            value={formData.mobile}
+            onChange={handleChange}
+            required
+          />
+          <select
+            name="specialty"
+            value={selectedSpecialty?.id || ''}
+            onChange={handleSpecialtyChange}
+            required
           >
-            <option value="" disabled>Choose Doctor</option>
-            {selectedSpecialty.medics.map((doc) => (
-              <option key={doc.id} value={`${doc.name} ${doc.lastName}`}>
-                {doc.name} {doc.lastName}
+            <option value="" disabled>Choose Specialty</option>
+            {specialties.map((specialty) => (
+              <option key={specialty.id} value={specialty.id}>
+                {specialty.name}
               </option>
             ))}
           </select>
         </div>
-      )}
-      <div className="form-row">
-        <DatePicker
-          selected={formData.date}
-          onChange={handleDateChange}
-          dateFormat="dd/MM/yyyy"
-          className="date-picker"
-          placeholderText="Select Date"
-          minDate={new Date('2025-03-01')}
-          maxDate={new Date('2025-03-31')}
-          showMonthYearPicker={false}
-          showYearDropdown={false}
-          dropdownMode="select"
-        />
-        <TimePickerContainer
-          time={formData.time}
-          onTimeChange={handleTimeChange}
-          inputRef={timeInputRef}
-          pickerRef={timePickerRef}
-        />
-      </div>
-      <button type="submit" className="book-btn">Book Appointment</button>
-    </form>
+        {selectedSpecialty && (
+          <div className="doctor-list">
+            <h4>Doctors in {selectedSpecialty.name}</h4>
+            <select
+              name="doctor"
+              value={formData.doctor}
+              onChange={handleChange}
+              required
+              className="doctor-choose"
+            >
+              <option value="" disabled>Choose Doctor</option>
+              {selectedSpecialty.medics.map((doc) => (
+                <option key={doc.id} value={`${doc.name} ${doc.lastName}`}>
+                  {doc.name} {doc.lastName}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+        <div className="form-row">
+          <DatePicker
+            selected={formData.date}
+            onChange={handleDateChange}
+            dateFormat="dd/MM/yyyy"
+            className="date-picker"
+            placeholderText="Select Date"
+            minDate={new Date('2025-03-01')}
+            maxDate={new Date('2025-03-31')}
+            showMonthYearPicker={false}
+            showYearDropdown={false}
+            dropdownMode="select"
+          />
+          <TimePickerContainer
+            time={formData.time}
+            onTimeChange={handleTimeChange}
+            inputRef={timeInputRef}
+            pickerRef={timePickerRef}
+          />
+        </div>
+        <button type="submit" className="book-btn">Book Appointment</button>
+      </form>
+      <LoginFailedModal
+        isOpen={ isErrorModalOpen} 
+        onClose={onCloseError} 
+        title="Error booking appointment"
+        message={errorMessage}
+        primaryButtonText="Try Again" 
+      />
+      <LoginFailedModal 
+        isOpen={ isSuccessModalOpen} 
+        onClose={onCloseSuccess} 
+        title="Succeses Appointment"
+        message="Appointment booked successfully!"
+        primaryButtonText="Close"   
+      />
+    </>
   );
 };

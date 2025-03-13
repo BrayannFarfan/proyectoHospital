@@ -19,7 +19,7 @@ export const Profile = () => {
 
     function handlelogout(){
       logout()
-      navigate('/login-user')
+      navigate('/')
     }
 
     

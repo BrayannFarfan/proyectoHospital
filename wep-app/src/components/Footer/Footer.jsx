@@ -26,7 +26,7 @@ export const Footer = () => {
             <li><Link to="/doctors">Doctors</Link></li>
             <li><Link to="/clinics">Clinics</Link></li>
             <li><Link to="/specialization">Specialization</Link></li>
-            <li><Link to="/join">Join as a Doctor</Link></li>
+            <li><Link to="/appointment">Join as a Doctor</Link></li>
             <li><Link to="/download">Download App</Link></li>
           </ul>
         </div>

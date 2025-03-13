@@ -65,7 +65,7 @@ export const CreateAppointment = async ( req , res ) =>{
         })
 
         if ( existingAppointment ) {
-                return res.status(409).json({ message: "El médico ya tiene una cita en este horario" });
+                return res.status(409).json({ message: "The doctor already has an appointment at this time." });
             }else{
                 const createAppointment = await Appointment.create({
                     date,
