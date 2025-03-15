@@ -1,12 +1,17 @@
 import express from "express";
 export const MedicRouterRegister = express.Router();
-import { getOneMedic, getAllMedic, CreateMedic, updateMedic, deleteMedic  } from "../controllers/Medic.controllers.js";
+import { getOneMedic, getAllMedic, CreateMedic, updateMedic, deleteMedic, getOneMedicAvailable,setMedicAvailability  } from "../controllers/Medic.controllers.js";
 
 
 
 
 //GETONE Medic
 MedicRouterRegister.get('/:id', getOneMedic)
+
+//GETONE Medic Available
+MedicRouterRegister.get('/:id/availability', getOneMedicAvailable)
+
+MedicRouterRegister.post('/:id/availability', setMedicAvailability);
 
 //GETALL Medic
 MedicRouterRegister.get('/', getAllMedic)

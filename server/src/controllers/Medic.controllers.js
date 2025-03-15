@@ -1,3 +1,5 @@
+import { Appointment } from '../models/Appointment.js';
+import { Availability } from '../models/Availability.js';
 import { Medic } from '../models/Medic.js';
 import { Specialties } from '../models/Specialties.js';
 
@@ -91,3 +93,102 @@ export const deleteMedic = async ( req, res ) =>{
         return res.status( 500 ).json({ message: error.message })
     }
 }
+
+export const getOneMedicAvailable = async (req, res) => {
+  const { id: medicId } = req.params;
+
+  try {
+    const doctor = await Medic.findByPk(medicId);
+    if (!doctor) {
+      return res.status(404).json({ message: 'Doctor not found' });
+    }
+
+    const availabilities = await Availability.findAll({
+      where: { MedicId: medicId, isAvailable: true },
+      attributes: ['date', 'time'],
+    });
+
+    const existingAppointments = await Appointment.findAll({
+      where: { MedicId: medicId },
+      attributes: ['date', 'time'],
+    });
+
+    const occupiedTimes = existingAppointments.map((appt) => ({
+      date: appt.date,
+      time: appt.time,
+    }));
+
+    const availabilityByDate = availabilities.reduce((acc, avail) => {
+      const { date, time } = avail;
+      const timeKey = time;
+      const isOccupied = occupiedTimes.some(
+        (appt) => appt.date === date && appt.time === timeKey
+      );
+
+      if (!acc[date]) {
+        acc[date] = [];
+      }
+      const [hourMinute, period] = time.split(' ');
+      const [hour, minute] = hourMinute.split(':').map(Number);
+      acc[date].push({ hour, minute, period, isOccupied });
+      return acc;
+    }, {});
+
+    res.json(availabilityByDate);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching available times', error: error.message });
+  }
+};
+
+export const setMedicAvailability = async (req, res) => {
+  const { id: MedicId } = req.params;
+  const { date, time } = req.body;
+
+  try {
+    const doctor = await Medic.findByPk(MedicId);
+    if (!doctor) {
+      return res.status(404).json({ message: 'Doctor not found' });
+    }
+
+    if (!Array.isArray(date) || !Array.isArray(time) || time.length === 0) {
+      return res.status(400).json({ message: 'Invalid input: date and time must be non-empty arrays' });
+    }
+
+    let datesToUse = date;
+    if (date.length === 1) {
+      datesToUse = Array(time.length).fill(date[0]);
+    } else if (date.length !== time.length) {
+      return res.status(400).json({ message: 'Invalid input: date and time arrays must have equal length when multiple dates are provided' });
+    }
+
+
+    const existingAvailabilities = await Availability.findAll({
+      where: {
+        MedicId: MedicId,
+        date: datesToUse, 
+        time: time,    
+      },
+    });
+
+    if (existingAvailabilities.length > 0) {
+      const duplicateTimes = existingAvailabilities.map((avail) => avail.time);
+      return res.status(400).json({
+        message: 'Duplicate availability entries found',
+        duplicates: duplicateTimes,
+      });
+    }
+
+
+    const availabilities = datesToUse.map((d, index) => ({
+      MedicId: MedicId,
+      date: d,
+      time: time[index],
+      isAvailable: true,
+    }));
+
+    const createdAvailabilities = await Availability.bulkCreate(availabilities, { validate: true });
+    res.status(201).json({ message: 'Availability set successfully', availabilities: createdAvailabilities });
+  } catch (error) {
+    res.status(500).json({ message: 'Error setting available times', error: error.message });
+  }
+};

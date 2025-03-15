@@ -1,9 +1,8 @@
-// src/components/TimePickerContainer.jsx
 import React, { useState, useEffect } from 'react';
 import { TimePicker } from './TimePicker';
-import { InputContent } from '../ContainerInput/InputContent'
+import { InputContent } from '../ContainerInput/InputContent';
 
-export const TimePickerContainer = ({ time, onTimeChange, inputRef, pickerRef }) => {
+export const TimePickerContainer = ({ time, onTimeChange, inputRef, pickerRef, availableTimes = [] }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleTimeClick = (e) => {
@@ -30,6 +29,7 @@ export const TimePickerContainer = ({ time, onTimeChange, inputRef, pickerRef })
   }, []);
 
   const formatTime = (time) => {
+    if (!time) return '';
     return `${time.hour < 10 ? `0${time.hour}` : time.hour}:${time.minute < 10 ? `0${time.minute}` : time.minute} ${time.period}`;
   };
 
@@ -46,7 +46,11 @@ export const TimePickerContainer = ({ time, onTimeChange, inputRef, pickerRef })
       />
       {isOpen && (
         <div ref={pickerRef} className="time-picker-popup">
-          <TimePicker value={time} onChange={onTimeChange} />
+          <TimePicker
+            value={time}
+            onChange={onTimeChange}
+            availableTimes={availableTimes}
+          />
         </div>
       )}
     </div>

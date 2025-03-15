@@ -1,35 +1,45 @@
-// src/components/TimePicker.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './TimePicker.css';
 
-export const TimePicker = ({ value, onChange }) => {
-  const [hour, setHour] = useState(value.hour || 9);
-  const [minute, setMinute] = useState(value.minute || 25);
-  const [period, setPeriod] = useState(value.period || 'PM');
+export const TimePicker = ({ value, onChange, availableTimes = [] }) => {
+  const [selectedIndex, setSelectedIndex] = useState(() => {
+    const initialIndex = availableTimes.findIndex(
+      (t) => t.hour === value?.hour && t.minute === value?.minute && t.period === value?.period
+    );
+    return initialIndex >= 0 ? initialIndex : 0;
+  });
+
+  useEffect(() => {
+    const newIndex = availableTimes.findIndex(
+      (t) => t.hour === value?.hour && t.minute === value?.minute && t.period === value?.period
+    );
+    if (newIndex >= 0) setSelectedIndex(newIndex);
+  }, [value, availableTimes]);
 
   const handleHourChange = (direction) => {
-    let newHour = direction === 'up' ? hour + 1 : hour - 1;
-    if (newHour > 12) newHour = 1;
-    if (newHour < 1) newHour = 12;
-    setHour(newHour);
-    onChange({ hour: newHour, minute, period });
+    const newIndex = direction === 'up'
+      ? (selectedIndex + 1) % availableTimes.length
+      : (selectedIndex - 1 + availableTimes.length) % availableTimes.length;
+    setSelectedIndex(newIndex);
+    onChange(availableTimes[newIndex]);
   };
 
   const handleMinuteChange = (direction) => {
-    let newMinute = direction === 'up' ? minute + 1 : minute - 1;
-    if (newMinute > 59) newMinute = 0;
-    if (newMinute < 0) newMinute = 59;
-    setMinute(newMinute);
-    onChange({ hour, minute: newMinute, period });
+    const newIndex = direction === 'up'
+      ? (selectedIndex + 1) % availableTimes.length
+      : (selectedIndex - 1 + availableTimes.length) % availableTimes.length;
+    setSelectedIndex(newIndex);
+    onChange(availableTimes[newIndex]);
   };
 
   const togglePeriod = () => {
-    const newPeriod = period === 'AM' ? 'PM' : 'AM';
-    setPeriod(newPeriod);
-    onChange({ hour, minute, period: newPeriod });
+    const newIndex = (selectedIndex + 1) % availableTimes.length;
+    setSelectedIndex(newIndex);
+    onChange(availableTimes[newIndex]);
   };
 
   const formatNumber = (num) => (num < 10 ? `0${num}` : num);
+  const currentTime = availableTimes[selectedIndex] || { hour: 9, minute: 25, period: 'PM' };
 
   return (
     <div className="time-picker">
@@ -37,7 +47,7 @@ export const TimePicker = ({ value, onChange }) => {
         <button type="button" onClick={() => handleHourChange('up')} className="arrow-btn">
           ↑
         </button>
-        <span className="time-value">{formatNumber(hour)}</span>
+        <span className="time-value">{formatNumber(currentTime.hour)}</span>
         <button type="button" onClick={() => handleHourChange('down')} className="arrow-btn">
           ↓
         </button>
@@ -47,13 +57,13 @@ export const TimePicker = ({ value, onChange }) => {
         <button type="button" onClick={() => handleMinuteChange('up')} className="arrow-btn">
           ↑
         </button>
-        <span className="time-value">{formatNumber(minute)}</span>
+        <span className="time-value">{formatNumber(currentTime.minute)}</span>
         <button type="button" onClick={() => handleMinuteChange('down')} className="arrow-btn">
           ↓
         </button>
       </div>
       <button type="button" onClick={togglePeriod} className="period-btn">
-        {period}
+        {currentTime.period}
       </button>
     </div>
   );

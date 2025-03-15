@@ -1,0 +1,38 @@
+.availability-section {
+    margin-top: 20px;
+  }
+  
+  .availability-section h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  .date-buttons{
+    display: flex;
+    width: 100px;
+    height: 50px;
+    gap: .5rem;
+  }
+.buttons-controllers{
+    /* display: flex; */
+    gap: 7rem;
+}
+  
+  .date-button,
+  .time-button {
+    font-size: .6rem;
+  }
+
+  .date-button.selected,
+  .time-button.selected {
+    background-color: #1f645f;
+    color: white;
+    border-color: #1f645f;
+  }
+  .time-buttons{
+    display: flex;
+    width: 100px;
+    height: 50px;
+    gap: .5rem;
+  }
+
+  
