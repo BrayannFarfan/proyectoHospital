@@ -35,4 +35,11 @@
     gap: .5rem;
   }
 
-  
+  .no-availability-message {
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px;
+    background-color: #1f645f;
+    border-radius: 5px;
+    text-align: center;
+  }

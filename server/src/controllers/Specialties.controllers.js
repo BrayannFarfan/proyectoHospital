@@ -72,7 +72,6 @@ export const updateSpecialties = async ( req, res ) =>{
     
     try {
         const updateSpecialties = await Specialties.findByPk(id);
-        console.log('DE LA BASE DE DATOS',updateSpecialties);
 
         if(!updateSpecialties) return res.status( 400 ).json({ message: `La Especialidad no existe` });
             updateSpecialties.update(req.body);
@@ -86,7 +85,6 @@ export const updateSpecialties = async ( req, res ) =>{
 
 export const deleteSpecialties = async ( req, res ) =>{
     const { id } = req.params;
-    console.log(id);
     try {
         const deleteSpecialties = await Specialties.destroy({ where: { id } })
         return res.status( 200 ).json({ data: deleteSpecialties})

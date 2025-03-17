@@ -44,7 +44,6 @@ try {
 
 export const CreateAppointment = async ( req , res ) =>{
     const  { date, time, specialtyId, PatientId , MedicId} = req.body
-    console.log(req.body);
     try {
         
         const patient =  await Patient.findByPk(PatientId)

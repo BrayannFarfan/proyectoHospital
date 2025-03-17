@@ -51,7 +51,6 @@ export const CreateMedic = async ( req , res ) =>{
         const findSpecialty = await Specialties.findOne({ where: { id: specialtyId}})
         if(!findSpecialty) return res.status( 400 ).json({ message: `La especialidad ${ specialtyId } no existe`})
 
-console.log(findSpecialty);
 
 
             const createMedic = await Medic.create({
@@ -118,6 +117,12 @@ export const getOneMedicAvailable = async (req, res) => {
       time: appt.time,
     }));
 
+    if (availabilities.length === 0) {
+      return res.status(200).json({
+        message: 'No schedules or dates available for this doctor',
+      });
+    }
+
     const availabilityByDate = availabilities.reduce((acc, avail) => {
       const { date, time } = avail;
       const timeKey = time;
@@ -125,12 +130,14 @@ export const getOneMedicAvailable = async (req, res) => {
         (appt) => appt.date === date && appt.time === timeKey
       );
 
-      if (!acc[date]) {
-        acc[date] = [];
+      if (!isOccupied) {
+        if (!acc[date]) {
+          acc[date] = [];
+        }
+        const [hourMinute, period] = time.split(' ');
+        const [hour, minute] = hourMinute.split(':').map(Number);
+        acc[date].push({ hour, minute, period });
       }
-      const [hourMinute, period] = time.split(' ');
-      const [hour, minute] = hourMinute.split(':').map(Number);
-      acc[date].push({ hour, minute, period, isOccupied });
       return acc;
     }, {});
 

@@ -12,6 +12,8 @@ export const AppointmentForm = () => {
   const [isErrorModalOpen, setIsErrorModal] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [availabilityByDate, setAvailabilityByDate] = useState({});
+  const [selectedDate, setSelectedDate] = useState(null);
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem('user')) || {};
@@ -26,8 +28,7 @@ export const AppointmentForm = () => {
     time: null,
   });
 
-  const [availabilityByDate, setAvailabilityByDate] = useState({});
-  const [selectedDate, setSelectedDate] = useState(null);
+
 
   useEffect(() => {
     const fetchAvailableTimes = async () => {
@@ -43,7 +44,14 @@ export const AppointmentForm = () => {
           throw new Error('Failed to fetch available times');
         }
         const data = await response.json();
-        setAvailabilityByDate(data);
+
+        if (data.message && data.message.includes('No schedules or dates available')) {
+          setAvailabilityByDate({ message: data.message });
+          setSelectedDate(null);
+          setFormData((prev) => ({ ...prev, date: null, time: null }));
+        } else {
+          setAvailabilityByDate(data);
+        }
       } catch (error) {
         setErrorMessage(`Error fetching availability: ${error.message}`);
         setIsErrorModal(true);
@@ -77,15 +85,18 @@ export const AppointmentForm = () => {
     const doctorId = selectedDoctor?.id || '';
     setFormData((prev) => ({ ...prev, doctorId, doctor: doctorFullName, date: null, time: null }));
     setSelectedDate(null);
+    setAvailabilityByDate({});
   };
 
   const handleDateSelect = (date) => {
-    setSelectedDate(date);
-    setFormData((prev) => ({ ...prev, date: new Date(date), time: null }));
+    if (!availabilityByDate.message && Object.keys(availabilityByDate).length > 0) {
+      setSelectedDate(date);
+      setFormData((prev) => ({ ...prev, date: new Date(date), time: null }));
+    }
   };
 
   const handleTimeSelect = (time) => {
-    if (!time.isOccupied) {
+    if (!availabilityByDate.message) {
       setFormData((prev) => ({ ...prev, time }));
     }
   };
@@ -139,7 +150,7 @@ export const AppointmentForm = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        setAvailabilityByDate(data);
+        setAvailabilityByDate(data.message ? { message: data.message } : data);
         setSelectedDate(null);
         setFormData((prev) => ({ ...prev, date: null, time: null }));
       }
@@ -235,7 +246,12 @@ export const AppointmentForm = () => {
             </select>
           </div>
         )}
-        {Object.keys(availabilityByDate).length > 0 && (
+        {availabilityByDate.message && (
+          <div className="availability-section">
+            <p className="no-availability-message">{availabilityByDate.message}</p>
+          </div>
+        )}
+        {!availabilityByDate.message && Object.keys(availabilityByDate).length > 0 && (
           <div className="availability-section">
             <h4>Available Dates</h4>
             <div className="date-buttons">
@@ -252,9 +268,9 @@ export const AppointmentForm = () => {
             </div>
           </div>
         )}
-        {selectedDate && availabilityByDate[selectedDate] && (
+        {selectedDate && !availabilityByDate.message && availabilityByDate[selectedDate] && (
           <div className="availability-section">
-            <h4>Available Times for {selectedDate}</h4>
+            <h4>Available Times</h4>
             <div className="time-buttons">
               {availabilityByDate[selectedDate].map((time, index) => (
                 <button
@@ -262,16 +278,13 @@ export const AppointmentForm = () => {
                   key={index}
                   onClick={() => handleTimeSelect(time)}
                   className={`time-button ${
-                    time.isOccupied
-                      ? 'occupied'
-                      : formData.time &&
-                        formData.time.hour === time.hour &&
-                        formData.time.minute === time.minute &&
-                        formData.time.period === time.period
+                    formData.time &&
+                    formData.time.hour === time.hour &&
+                    formData.time.minute === time.minute &&
+                    formData.time.period === time.period
                       ? 'selected'
                       : ''
                   }`}
-                  disabled={time.isOccupied}
                 >
                   {formatTime(time)}
                 </button>
