@@ -45,10 +45,12 @@ export const AuthProvider = ({children}) =>{
             
             const expirationTime = new Date().getTime() + 3 * 24 * 60 * 60 * 1000;
        
-            localStorage.setItem('user', JSON.stringify(userData))
+            localStorage.setItem('user', JSON.stringify(userData.data))
+            console.log(userData.data);
+            
             localStorage.setItem('expiration', expirationTime.toString()); 
 
-            setUser(userData)
+            setUser(userData.data)
             return true; 
             
         } catch (error) {
@@ -73,10 +75,7 @@ export const AuthProvider = ({children}) =>{
         try {
             const response  = await fetch('http://localhost:3000/auth/register', {
                 method:'POST',
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body: JSON.stringify( registrations ),
+                body: registrations ,
             })
             
             if (!response.ok) throw new Error(userData.message || 'Error al registrarse');

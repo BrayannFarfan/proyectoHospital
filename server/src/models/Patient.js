@@ -22,5 +22,10 @@ export const Patient = db.define('Patient', {
     },
     password:{
         type: DataTypes.STRING
+    },
+    profilePic: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: 'uploads/placeholder/placeholder.jpg', 
     }
 })

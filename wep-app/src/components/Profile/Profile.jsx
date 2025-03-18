@@ -10,9 +10,12 @@ export const Profile = () => {
 
     const [ isOpen , setIsOpen ] = useState(false)
     const { user , logout } = useAuth()
+    
     let navigate = useNavigate();
     
-
+    const profilePicUrl = user.profilePic
+    ? `http://localhost:3000/${user.profilePic}`
+    : 'http://localhost:3000/uploads/placeholder/placeholder.jpg';
     function   handleToggleDropdown () {
         setIsOpen(!isOpen)
     }
@@ -27,10 +30,10 @@ export const Profile = () => {
         <>
             <div className="profile-container">
       <div className="profile-button" onClick={handleToggleDropdown}>
-        <img src="https://placeholder.co/40" className="profile-image" />
+        <img src={profilePicUrl} className="profile-image" />
         <div className="profile-info">
-          <span className="profile-name">{user.data.name} {user.data.lastName}</span>
-          <span className="profile-email">{user.data.email}</span>
+          <span className="profile-name">{user.name} {user.lastName}</span>
+          <span className="profile-email">{user.email}</span>
         </div>
       </div>
       {isOpen && (
@@ -43,9 +46,6 @@ export const Profile = () => {
           </div>
           <div className="menu-item">
             <FaBell className="icon" /> Notifications
-          </div>
-          <div className="menu-item">
-            <FaExchangeAlt className="icon" /> Switch Account
           </div>
           <div className="menu-item">
             <FaQuestionCircle className="icon" /> Help Center

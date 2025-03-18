@@ -31,7 +31,7 @@ const DoctorCard = ({ doctor }) => {
     <div className="doctor-card"> 
     <Link to="/doctor-detail" className="container_doctor">
       <div className="doctor-image">
-        <img src={doctor.image || 'https://via.placeholder.com/150'} alt={doctor.name} />
+        <img src={`http://localhost:3000/${doctor.profilePic}`} alt={doctor.name} />
           <span className="heart-icon" onClick={(e) => { e.preventDefault(); handleFavoriteToggle(); }}>
             <FaHeart color={isFavorite ? '#ff0000' : '#ccc'} /> 
           </span>

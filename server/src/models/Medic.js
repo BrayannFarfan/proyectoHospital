@@ -14,6 +14,11 @@ export const Medic = db.define('Medic', {
     specialtyId: {
         type: DataTypes.INTEGER,
         allowNull: false 
+    },
+    profilePic: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: 'uploads/placeholder/placeholder-doctor.jpg'
     }
 },{
     tableName: 'medics',

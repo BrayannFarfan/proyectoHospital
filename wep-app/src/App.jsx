@@ -6,13 +6,14 @@ import { useAuth } from './context/AuthProvider'
 import { Home } from './Page/home/home.jsx'
 import { ContainerAuthRegister } from './components/ContainerAuth/ContainerAuthRegister.jsx';
 import { About } from './Page/about/about.jsx';
+import { ComminSoon } from './Page/comminSoon/ComminSoon.jsx';
 import { Doctors } from './Page/doctors/Doctors.jsx';
 import { Appointment } from './Page/appointment/Appointment.jsx';
 
 function App() {
 
   const { user } = useAuth()
-
+ 
   return (
     <>
           <Routes>
@@ -24,6 +25,7 @@ function App() {
             <Route path='/register-user' element={<ContainerAuthRegister/>}  />
             <Route path='/forgot-password' element={<ForgotPass/>}  />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/coming-soon" element={< ComminSoon/>} />
           </Routes>
     </>
   )

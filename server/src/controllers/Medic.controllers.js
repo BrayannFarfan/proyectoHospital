@@ -2,7 +2,13 @@ import { Appointment } from '../models/Appointment.js';
 import { Availability } from '../models/Availability.js';
 import { Medic } from '../models/Medic.js';
 import { Specialties } from '../models/Specialties.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs/promises';
 
+// Obtener __dirname en módulos ES
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const getOneMedic = async ( req , res ) =>{
     const { id } = req.params;
@@ -40,31 +46,43 @@ try {
 }
 }
 
-export const CreateMedic = async ( req , res ) =>{
-    const  { name, lastName, cardMedic, specialtyId } = req.body
+export const CreateMedic = async (req, res) => {
+  const { name, lastName, cardMedic, specialtyId } = req.body;
 
-    try {
-        
-        const findMedic = await Medic.findOne({ where : { cardMedic : cardMedic}})
-        if(findMedic){ return res.status( 402 ).json({ message : `El medico ${findMedic.name} ${findMedic.lastName} ya está creado`})}
-
-        const findSpecialty = await Specialties.findOne({ where: { id: specialtyId}})
-        if(!findSpecialty) return res.status( 400 ).json({ message: `La especialidad ${ specialtyId } no existe`})
-
-
-
-            const createMedic = await Medic.create({
-                name,
-                lastName,
-                cardMedic,
-                specialtyId : findSpecialty.id
-            })
-            await createMedic.save()
-            return res.status( 200 ).json({ data : createMedic})
-    } catch ( error ) {
-        return res.status( 500 ).json({ message: error.message })
+  try {
+    const findMedic = await Medic.findOne({ where: { cardMedic: cardMedic } });
+    if (findMedic) {
+      return res.status(402).json({ message: `El médico ${findMedic.name} ${findMedic.lastName} ya está creado` });
     }
-}
+
+    const findSpecialty = await Specialties.findOne({ where: { id: specialtyId } });
+    if (!findSpecialty) {
+      return res.status(400).json({ message: `La especialidad ${specialtyId} no existe` });
+    }
+
+    const createMedic = await Medic.create({
+      name,
+      lastName,
+      cardMedic,
+      specialtyId: findSpecialty.id,
+    });
+
+    if (req.file) {
+      const tempPath = req.file.path;
+      const newFileName = `medic-${createMedic.id}-${Date.now()}${path.extname(req.file.originalname)}`;
+      const newPath = path.join(__dirname, '../uploads/medics', newFileName);
+
+      await fs.rename(tempPath, newPath);
+
+      createMedic.profilePic = `uploads/medics/${newFileName}`;
+      await createMedic.save();
+    }
+
+    return res.status(200).json({ data: createMedic });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 export const updateMedic = async ( req, res ) =>{
 const {  id } = req.params;

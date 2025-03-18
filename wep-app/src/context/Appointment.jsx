@@ -9,9 +9,10 @@ export const AppointmentProvider = ({ children }) => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
+
     
-    if (user.data.id) {
-      setPatientId(user.data.id);
+    if (user.id) {
+      setPatientId(user.id);
     } else {
       console.warn('No se encontró patientId en localStorage');
     }

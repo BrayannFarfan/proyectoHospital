@@ -33,7 +33,7 @@ export const Header = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link className="header_link" to={'/departaments'}>
+                            <Link className="header_link" to={'/coming-soon'}>
                                 Coming Soon
                             </Link>
                         </li>

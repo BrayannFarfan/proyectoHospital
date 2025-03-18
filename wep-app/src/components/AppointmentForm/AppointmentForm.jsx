@@ -17,7 +17,7 @@ export const AppointmentForm = () => {
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem('user')) || {};
-  const userData = user.data || {};
+  const userData = user || {};
 
   const [formData, setFormData] = useState({
     name: userData.name || '',
