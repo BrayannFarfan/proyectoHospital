@@ -48,7 +48,7 @@ p {
 
 
 
-button {
+.form_login button {
     width: 100%;
     padding: 12px;
     background-color: #2CB0A5; 
@@ -60,7 +60,7 @@ button {
     margin-bottom: 15px;
 }
 
-button:hover {
+.form_login button:hover {
     background-color: #2CB0A5; 
 }
 

@@ -1,0 +1,205 @@
+
+  .pricing-table {
+    padding: 20px;
+    margin-top: 6rem;
+  }
+  
+  .pricing-table h1 {
+    color: #00224F;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+
+  }
+  
+  .toggle-container {
+    margin-bottom: 40px;
+    text-align: center;
+
+  }
+  
+  .toggle-container span {
+    color: #2dd4bf;
+    font-weight: bold;
+    margin: 0 4px;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 34px;
+    
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #2dd4bf;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+  .cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .pricing-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    height: 407px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.2s;
+  }
+  
+  .pricing-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .pricing-card.popular {
+    border: 2px solid #2dd4bf;
+  }
+  
+  .pricing-card h2 {
+    color: #00224F;
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin: 50px 20px;
+  }
+
+  
+  .pricing-card .price {
+    color: #2dd4bf;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin: 50px 20px;
+    line-height: 1px;
+  }
+  
+  .pricing-card ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .pricing-card ul li {
+    color: #4b5563;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
+  }
+  
+  .pricing-card ul li::before {
+    content: "✔";
+    color: #2dd4bf;
+    position: absolute;
+    left: 0;
+  }
+
+.buy-button {
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+  }
+  .pricing-card.popular .buy-button {
+    background-color: #2dd4bf;
+  }
+  .buy-button:hover {
+    background-color: #1d9b8a;
+    padding: 10px 20px;
+  }
+  
+  .custom-arrow {
+    display: inline-block;
+    position: relative;
+    width: 16px; 
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .custom-arrow::after {
+    content: '→'; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #2dd4bf;
+    font-size: 16px;
+  }
+
+
+.pricing-card:not(.popular) .buy-button:hover {
+  width: 150px; 
+  transition: width 0.3s ease, padding 0.3s ease; 
+}
+  .pricing-card:not(.popular) .buy-button:hover::after {
+    content: "Buy Package →";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap; 
+    width: 100%; 
+  }
+  
+  .pricing-card:not(.popular) .buy-button:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  
+  .pricing-card:not(.popular) .buy-button {
+    width: 50px; 
+    padding:20px 10px;
+  }
+  

@@ -1,4 +1,4 @@
-import { Routes , Route, Navigate } from 'react-router';
+import { Routes , Route } from 'react-router';
 import { ContainerAuth } from './components/ContainerAuth/ContainerAuth';
 import { ForgotPass } from './components/ForgotPass/ForgotPass.jsx';
 import { ResetPassword } from './components/ResetPassword/ResetPassword.jsx';
@@ -6,7 +6,7 @@ import { useAuth } from './context/AuthProvider'
 import { Home } from './Page/home/home.jsx'
 import { ContainerAuthRegister } from './components/ContainerAuth/ContainerAuthRegister.jsx';
 import { About } from './Page/about/about.jsx';
-import { ComminSoon } from './Page/comminSoon/ComminSoon.jsx';
+import { OurPricing } from './Page/OurPricing/OurPricing.jsx';
 import { Doctors } from './Page/doctors/Doctors.jsx';
 import { Appointment } from './Page/appointment/Appointment.jsx';
 
@@ -25,7 +25,7 @@ function App() {
             <Route path='/register-user' element={<ContainerAuthRegister/>}  />
             <Route path='/forgot-password' element={<ForgotPass/>}  />
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/coming-soon" element={< ComminSoon/>} />
+            <Route path="/our-pricing" element={< OurPricing/>} />
           </Routes>
     </>
   )
