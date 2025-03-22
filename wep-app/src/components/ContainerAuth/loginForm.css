@@ -1,93 +1,151 @@
+/* Estilos generales para el contenedor del formulario */
 .login_container {
-    max-width: 400px;
+    max-width: 800px; /* Aumentamos el ancho para las dos columnas */
     margin: 50px auto;
     padding: 20px;
     text-align: center;
-    /* border: 1px solid #e0e0e0; */
     border-radius: 8px;
     background-color: #ffffff;
-}
-
-h2 {
-    color: #2CB0A5; 
+  }
+  
+  h2 {
+    color: #2CB0A5;
     font-size: 24px;
     margin-bottom: 30px;
-}
-
-p {
+  }
+  
+  p {
     color: #666;
     font-size: 14px;
     margin-bottom: 90px;
-}
-
-.input_group {
+  }
+  
+  .input_group {
     margin-bottom: 20px;
     text-align: left;
-}
-
-.input_group label {
+  }
+  
+  .input_group label {
     display: block;
     color: #666;
     font-size: 14px;
     margin-bottom: 5px;
-}
-
-.input_group input {
+  }
+  
+  .input_group input,
+  .input_group .file-input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
     outline: none;
-}
-
-.input_group input:focus {
+  }
+  
+  .input_group input:focus {
     border-color: #2CB0A5;
     box-shadow: 0 0 5px rgba(46, 125, 50, 0.3);
-}
-
-
-
-.form_login button {
+  }
+  
+  /* Estilo para el botón dentro del formulario */
+  .register_form button {
     width: 100%;
     padding: 12px;
-    background-color: #2CB0A5; 
+    background-color: #2CB0A5;
     color: white;
     border: none;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-    margin-bottom: 15px;
-}
-
-.form_login button:hover {
-    background-color: #2CB0A5; 
-}
-
-.signup_link {
+  }
+  
+  .register_form button:hover {
+    background-color: #2CB0A5;
+  }
+  
+  /* Estilo para el enlace */
+  .signup_link {
     color: #666;
     font-size: 14px;
-}
-
-.signup_link a {
+  }
+  
+  .signup_link a {
     color: #2CB0A5;
     text-decoration: none;
-}
-
-.signup_link a:hover {
+  }
+  
+  .signup_link a:hover {
     text-decoration: underline;
-}
-.forgot_password{
+  }
+  
+  .forgot_password {
     display: flex;
     justify-content: end;
     margin-top: 1.2rem;
     color: #666;
-}
-.register_form{
+  }
+  
+  /* Grid para el formulario */
+  .register_form {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    gap: 2rem;
-}
-
-
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+    grid-template-rows: auto; /* Filas automáticas */
+    column-gap: 2rem; /* Espacio entre columnas */
+    row-gap: 1rem; /* Espacio entre filas */
+    grid-template-areas: 
+      "item_1 item_5"
+      "item_2 item_6"
+      "item_3 item_7"
+      "item_4 item_8"
+      "item_9 item_9"; /* El botón y enlace ocupan ambas columnas */
+  }
+  
+  /* Asignamos las áreas a los elementos */
+  .item_1 { grid-area: item_1; }
+  .item_2 { grid-area: item_2; }
+  .item_3 { grid-area: item_3; }
+  .item_4 { grid-area: item_4; }
+  .item_5 { grid-area: item_5; }
+  .item_6 { grid-area: item_6; }
+  .item_7 { grid-area: item_7; }
+  .item_8 { grid-area: item_8; }
+  .item_9 { grid-area: item_9; }
+  
+  /* Estilo para el contenedor del botón y enlace */
+  .container_btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    gap: 10px; /* Espacio entre el botón y el enlace */
+  }
+  
+  /* Aseguramos que el botón dentro de container_btn tenga un ancho limitado */
+  .container_btn button {
+    max-width: 200px; /* Limita el ancho del botón */
+  }
+  
+  /* Aseguramos que el enlace también esté centrado */
+  .container_btn .signup_link {
+    text-align: center;
+  }
+  
+  /* Responsividad: Apilar columnas en pantallas pequeñas */
+  @media (max-width: 768px) {
+    .register_form {
+      grid-template-columns: 1fr; /* Una sola columna */
+      grid-template-areas: 
+        "item_1"
+        "item_2"
+        "item_3"
+        "item_4"
+        "item_5"
+        "item_6"
+        "item_7"
+        "item_8"
+        "item_9";
+    }
+  
+    .login_container {
+      max-width: 400px; /* Vuelve al ancho original en pantallas pequeñas */
+    }
+  }

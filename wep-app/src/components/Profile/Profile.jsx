@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthProvider";
-import { FaUser, FaCog, FaBell, FaExchangeAlt, FaQuestionCircle, FaSignOutAlt } from 'react-icons/fa';
-import { useNavigate } from 'react-router';
+import { FaUser, FaCog, FaBell, FaQuestionCircle, FaSignOutAlt } from 'react-icons/fa';
+import { useNavigate, Link } from 'react-router';
 import './profile.css';
 
 
@@ -16,6 +16,7 @@ export const Profile = () => {
     const profilePicUrl = user.profilePic
     ? `http://localhost:3000/${user.profilePic}`
     : 'http://localhost:3000/uploads/placeholder/placeholder.jpg';
+    
     function   handleToggleDropdown () {
         setIsOpen(!isOpen)
     }
@@ -38,17 +39,25 @@ export const Profile = () => {
       </div>
       {isOpen && (
         <div className="dropdown-menu">
-          <div className="menu-item">
-            <FaUser className="icon" /> View Profile
+          <div >
+            <Link to={'/profile'} className="menu-item">
+              <FaUser className="icon" /> View Profile
+            </Link>
           </div>
-          <div className="menu-item">
-            <FaCog className="icon" /> Account Settings
+          <div >
+            <Link to={'/dashboard-user'} className="menu-item">
+              <FaCog className="icon" /> Account Settings
+            </Link>
           </div>
-          <div className="menu-item">
-            <FaBell className="icon" /> Notifications
+          <div>
+            <Link to={'/notifications'} className="menu-item">
+              <FaBell className="icon" /> Notifications
+            </Link>
           </div>
-          <div className="menu-item">
-            <FaQuestionCircle className="icon" /> Help Center
+          <div >
+            <Link to={'/help-center'} className="menu-item">
+              <FaQuestionCircle className="icon" /> Help Center
+            </Link>
           </div>
           <div className="menu-item logout" onClick={handlelogout}>
             <FaSignOutAlt className="icon" /> Logout

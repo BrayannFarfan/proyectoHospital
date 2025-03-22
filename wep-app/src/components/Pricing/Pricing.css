@@ -85,10 +85,14 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
     transition: transform 0.2s;
+    
   }
   
   .pricing-card:hover {
     transform: translateY(-5px);
+    background-image: url(../../assets//shape-77.png);
+    background-repeat: no-repeat;
+    
   }
   
   .pricing-card.popular {
@@ -148,9 +152,14 @@
     align-items: center;
     justify-content: center;
     width: 150px;
+    box-shadow: 3px 3px 5px -3px rgba(79,54,4,1);
   }
   .pricing-card.popular .buy-button {
-    background-color: #2dd4bf;
+    background-color: #1d9b8a;
+  }
+  .pricing-card.popular{
+    background-image: url(../../assets//shape-77.png);
+    background-repeat: no-repeat;
   }
   .buy-button:hover {
     background-color: #1d9b8a;

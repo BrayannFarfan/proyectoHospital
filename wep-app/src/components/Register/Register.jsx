@@ -108,10 +108,10 @@ export const Register = () => {
         />
         <form
           onSubmit={handleSubmitRegistration}
-          className="register_form"
-          encType="multipart/form-data" // Necesario para enviar archivos
+          className="register_form form_login"
+          encType="multipart/form-data" 
         >
-          <div className="input_group">
+          <div className="input_group item_1">
             <label>Name</label>
             <InputContent
               type={'text'}
@@ -121,7 +121,7 @@ export const Register = () => {
               name='name'
             />
           </div>
-          <div className="input_group">
+          <div className="input_group item_2">
             <label>Last Name</label>
             <InputContent
               type={'text'}
@@ -131,7 +131,7 @@ export const Register = () => {
               name='lastName'
             />
           </div>
-          <div className="input_group">
+          <div className="input_group item_3">
             <label>Email Address</label>
             <InputContent
               type={'email'}
@@ -141,7 +141,7 @@ export const Register = () => {
               name='email'
             />
           </div>
-          <div className="input_group">
+          <div className="input_group item_4">
             <label>Password</label>
             <InputContent
               type={'password'}
@@ -151,7 +151,7 @@ export const Register = () => {
               name='password'
             />
           </div>
-          <div className="input_group">
+          <div className="input_group item_5">
             <label>Green Card</label>
             <InputContent
               type={'text'}
@@ -161,7 +161,7 @@ export const Register = () => {
               name='greenCard'
             />
           </div>
-          <div className="input_group">
+          <div className="input_group item_6">
             <label>Phone</label>
             <InputContent
               type={'tel'}
@@ -171,7 +171,7 @@ export const Register = () => {
               name='phone'
             />
           </div>
-          <div className="input_group">
+          <div className="input_group item_7">
             <label>Address</label>
             <InputContent
               type={'text'}
@@ -181,7 +181,7 @@ export const Register = () => {
               name='address'
             />
           </div>
-          <div className="input_group">
+          <div className="input_group item_8">
             <label>Profile Picture (Optional)</label>
             <input
               type="file"
@@ -191,12 +191,14 @@ export const Register = () => {
               className="file-input"
             />
           </div>
-          <button type="submit" disabled={loading} className="register_btn">
-            {loading ? 'Cargando....' : 'Sign up'}
-          </button>
-          <p className="signup_link">
-            You have an account? <Link to={'/login-user'}>Sign in</Link>
-          </p>
+          <div className="container_btn item_9">
+            <button type="submit" disabled={loading} className="register_btn">
+              {loading ? 'Cargando....' : 'Sign up'}
+            </button>
+            <p className="signup_link">
+              You have an account? <Link to={'/login-user'}>Sign in</Link>
+            </p>
+          </div>
         </form>
         <LoginFailedModal
           isOpen={isSuccessModalOpen}

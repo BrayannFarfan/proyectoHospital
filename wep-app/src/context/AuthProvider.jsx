@@ -27,6 +27,23 @@ export const AuthProvider = ({children}) =>{
         setLoading(false);
     }, []);
 
+    useEffect(() => {
+        const loadUser = async () => {
+          try {
+            // Ejemplo: Cargar el usuario desde localStorage o una API
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+            if (storedUser) {
+              setUser(storedUser);
+            }
+          } catch (error) {
+            console.error('Error loading user:', error);
+          } finally {
+            setLoading(false); 
+          }
+        };
+    
+        loadUser();
+      }, []);
 
     const login = async ( credentials ) =>{
         setLoading(true);
