@@ -5,6 +5,7 @@ const AppointmentContext = createContext();
 export const useAppointment = () => useContext(AppointmentContext);
 
 export const AppointmentProvider = ({ children }) => {
+
   const [patientId, setPatientId] = useState(null);
 
   useEffect(() => {
@@ -40,8 +41,9 @@ export const AppointmentProvider = ({ children }) => {
     }
   };
 
+
   return (
-    <AppointmentContext.Provider value={{ patientId, createAppointment }}>
+    <AppointmentContext.Provider value={{ patientId, createAppointment}}>
       {children}
     </AppointmentContext.Provider>
   );

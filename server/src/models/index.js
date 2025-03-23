@@ -15,17 +15,17 @@ Medic.belongsTo(Specialties , {
     foreignKey: "specialtyId",
 }) 
 
-Specialties.hasMany(Appointment, { foreignKey: 'specialtyId' });
-Appointment.belongsTo(Specialties, { foreignKey: 'specialtyId' });
+Specialties.hasMany(Appointment, { as: 'appointments', foreignKey: 'specialtyId' });
+Appointment.belongsTo(Specialties, { as: 'specialty', foreignKey: 'specialtyId' });
 
-Patient.hasMany(Appointment, { foreignKey: 'PatientId' });
-Appointment.belongsTo(Patient, { foreignKey: 'PatientId' });
+Patient.hasMany(Appointment, { as: 'appointments', foreignKey: 'PatientId' });
+Appointment.belongsTo(Patient, { as: 'patient', foreignKey: 'PatientId' });
 
-Medic.hasMany(Appointment, { foreignKey: 'MedicId' });
-Appointment.belongsTo(Medic, { foreignKey: 'MedicId' });
+Medic.hasMany(Appointment, { as: 'appointments', foreignKey: 'MedicId' });
+Appointment.belongsTo(Medic, { as: 'medic', foreignKey: 'MedicId' });
 
-Medic.hasMany(Availability, { foreignKey: 'MedicId' });
-Availability.belongsTo(Medic, { foreignKey: 'MedicId' });
+Medic.hasMany(Availability, { as: 'availabilities', foreignKey: 'MedicId' });
+Availability.belongsTo(Medic, { as: 'medic', foreignKey: 'MedicId' });
 
 
 // INICIALIZACIONES

@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router';
 export const Sidebar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  console.log(user);
   
 
   const handleLogout = () => {
@@ -23,10 +22,10 @@ export const Sidebar = () => {
         <MenuItem icon={<FaUser />} label="Dashboard" active to='/dashboard-user'/>
         <MenuItem icon={<FaHeart />} label="Favourite Doctors" to='/favorites'/>
         <MenuItem icon={<FaCalendar />} label="Schedule Timing" to='/schedule-timing'/>
-        <MenuItem icon={<FaEnvelope />} label="Messages" badge={20} to='messages'/>
-        <MenuItem icon={<FaUserCircle />} label="My Profile" to='my-profile'/>
-        <MenuItem icon={<FaKey />} label="Change Password" to='change-password'/>
-        <MenuItem icon={<FaSignOutAlt />} label="Logout" onClick={handleLogout} />
+        <MenuItem icon={<FaEnvelope />} label="Messages" badge={20} to='/messages'/>
+        <MenuItem icon={<FaUserCircle />} label="My Profile" to='/my-profile'/>
+        <MenuItem icon={<FaKey />} label="Change Password" to='/change-password'/>
+        <MenuItem icon={<FaSignOutAlt />} label="Logout" onClick={handleLogout} to={'/'}/>
       </nav>
     </aside>
   );

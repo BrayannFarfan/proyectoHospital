@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useCallback } from "react";
 
 
 const AuthContext = createContext()
@@ -8,6 +8,7 @@ export const AuthProvider = ({children}) =>{
     const [ doctor , setDoctor ] = useState([])
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [appointments, setAppointments] = useState([]);
 
 
     useEffect(() => {
@@ -80,6 +81,7 @@ export const AuthProvider = ({children}) =>{
 
     const logout = async ( ) =>{
         setUser(null)
+        setAppointments([])
         localStorage.removeItem('user');
         localStorage.removeItem('expiration');
     }
@@ -158,9 +160,35 @@ export const AuthProvider = ({children}) =>{
         }
     };
 
+    const getAppointment = useCallback(async (patientId) => {
+        try {
+          setError(null);
+          const result = await fetch(`http://localhost:3000/patient/${patientId}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+      
+          if (!result.ok) {
+            throw new Error(`Error ${result.status}: ${result.statusText}`);
+          }
+      
+          const appointmentPatient = await result.json();
+          // console.log('Datos recibidos del backend:', appointmentPatient.data.appointments);
+          setAppointments(appointmentPatient.data.appointments || []);
+          return appointmentPatient;
+        } catch (error) {
+          console.error('Error al obtener las citas del paciente:', error);
+          setError(error.message);
+          throw error;
+        }
+      }, []);
+    
+
     return (
         <AuthContext.Provider
-            value={{login, user, logout, loading, error, register, forgotPassword, resetPassword }}
+            value={{login, user, logout, loading, error, register, forgotPassword, resetPassword ,getAppointment,appointments}}
         >
 
             {children}

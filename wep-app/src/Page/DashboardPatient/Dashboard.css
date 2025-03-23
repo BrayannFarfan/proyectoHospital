@@ -272,8 +272,12 @@ tr {
 .action-btn:hover {
   text-decoration: underline;
 }
-
-
+.appointment-time {
+  display: block;
+  color: #48c7c7; /* Color similar al de tu imagen */
+  font-weight: bold;
+  margin-top: 4px; /* Espacio entre fecha y hora */
+}
 @media (max-width: 768px) {
   .dashboard-container {
     grid-template-columns: 1fr; /* Sidebar y contenido se apilan */
