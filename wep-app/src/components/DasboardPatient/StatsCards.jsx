@@ -1,7 +1,12 @@
 import { LuCalendarClock } from "react-icons/lu";
 import { MdOutlineMessage } from "react-icons/md";
 import { MdOutlineReviews } from "react-icons/md";
+import { useAuth } from "../../context/AuthProvider";
 export const StatsCards = () => {
+
+
+      const { appointments} = useAuth();
+
     return (
       <div className="stats-cards">
         <div className="stats-card card_1">
@@ -9,7 +14,7 @@ export const StatsCards = () => {
             <LuCalendarClock className="steps-icon" />
           </div>
           <div className="stats_text">
-            <h4>170</h4>
+            <h4>{appointments.length}</h4>
             <p>Total Appointment Escumed Temp</p>
           </div>
         </div>

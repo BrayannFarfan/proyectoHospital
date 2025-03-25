@@ -14,7 +14,7 @@ export const Profile = () => {
     let navigate = useNavigate();
     
     const profilePicUrl = user.profilePic
-    ? `http://localhost:3000/${user.profilePic}`
+    ? `http://localhost:3000${user.profilePic}`
     : 'http://localhost:3000/uploads/placeholder/placeholder.jpg';
     
     function   handleToggleDropdown () {
@@ -40,7 +40,7 @@ export const Profile = () => {
       {isOpen && (
         <div className="dropdown-menu">
           <div >
-            <Link to={'/profile'} className="menu-item">
+            <Link to={'/my-profile'} className="menu-item">
               <FaUser className="icon" /> View Profile
             </Link>
           </div>

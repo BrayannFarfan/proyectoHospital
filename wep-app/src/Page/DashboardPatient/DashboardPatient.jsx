@@ -34,11 +34,11 @@ export const DashboardPatient = () => {
             <h1>Patient Dashboard</h1>
           </div>
           <StatsCards appointments={appointments} />
-          {appointments.length === 0 ? (
+          <AppointmentsTable appointments={appointments} />
+          {/* {appointments.length === 0 ? (
             <div className="no-appointments-message">You have no booked appointments</div>
           ) : (
-            <AppointmentsTable appointments={appointments} />
-          )}
+          )} */}
         </main>
       </div>
     </>

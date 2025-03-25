@@ -184,11 +184,64 @@ export const AuthProvider = ({children}) =>{
           throw error;
         }
       }, []);
+
+
+      const updateProfile = async (formData, profilePic) => {
+        if (!user?.id) {
+          throw new Error("No se encontró el ID del usuario. Por favor, inicia sesión nuevamente.");
+        }
+    
+        console.log("Datos enviados al backend:", formData);
+        if (profilePic) {
+          console.log("Imagen enviada:", profilePic);
+        }
+    
+        const formDataToSend = new FormData();
+        for (const key in formData) {
+          formDataToSend.append(key, formData[key]);
+        }
+        if (profilePic) {
+          formDataToSend.append("profilePic", profilePic);
+        }
+    
+        try {
+          console.log("Haciendo solicitud al backend...");
+          const response = await fetch(`http://localhost:3000/patient/${user.id}`, {
+            method: "PUT",
+            body: formDataToSend,
+          });
+    
+          console.log("Respuesta del backend:", response);
+    
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.log("Error del backend:", errorData);
+            throw new Error(errorData.message || "Error al actualizar el perfil");
+          }
+    
+          const data = await response.json();
+          console.log("Datos recibidos del backend:", data);
+    
+          const updatedUser = {
+            ...user,
+            ...formData,
+            profilePic: data.data.profilePic || user.profilePic,
+          };
+    
+          localStorage.setItem('user', JSON.stringify(updatedUser));
+          setUser(updatedUser);
+    
+          return { success: true, message: "Perfil actualizado con éxito" };
+        } catch (error) {
+          console.error("Error en updateProfile:", error);
+          throw new Error(error.message || "Error al actualizar el perfil");
+        }
+      };
     
 
     return (
         <AuthContext.Provider
-            value={{login, user, logout, loading, error, register, forgotPassword, resetPassword ,getAppointment,appointments}}
+            value={{login, user, logout, loading, error, register, forgotPassword, resetPassword ,getAppointment,appointments,updateProfile}}
         >
 
             {children}

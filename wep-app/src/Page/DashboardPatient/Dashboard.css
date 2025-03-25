@@ -272,12 +272,70 @@ tr {
 .action-btn:hover {
   text-decoration: underline;
 }
-.appointment-time {
+.appointment-time, .appointment-specialty {
   display: block;
-  color: #48c7c7; /* Color similar al de tu imagen */
+  color: #48c7c7; 
   font-weight: bold;
-  margin-top: 4px; /* Espacio entre fecha y hora */
+  margin-top: 4px; 
 }
+.appointment-specialty{
+  color: #bcbaba !important;
+  font-weight: normal;
+}
+.td-medic{
+  color: #00224F;
+  font-weight: bold;
+}
+.appointment-date{
+  color: #00224F;
+  
+}
+
+
+
+/* favorite secction */
+
+.favorites-cards{
+
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 0 auto;
+  border-top: 1px solid #e9ecef;
+  padding: 15px 0;
+}
+
+.favorite-text{
+  font-size: 1rem;
+  color: #00224F;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.favorite-message{
+
+  color: #48c7c7; 
+  font-weight: bold;
+  margin-top: 4px; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 768px) {
   .dashboard-container {
     grid-template-columns: 1fr; /* Sidebar y contenido se apilan */

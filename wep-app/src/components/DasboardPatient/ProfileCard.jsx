@@ -1,27 +1,11 @@
 
-export const ProfileCard = ({ user }) => {
-  if (!user) {
-    return (
-      <div className="profile-card">
-        <div className="profile-pic-container">
-          <img
-            src={defaultProfilePic}
-            alt="Profile"
-            className="profile-pic"
-          />
-        </div>
-        <div className="profile-info">
-          <h3>Loading...</h3>
-          <p>
-            <FaCalendar className="calendar-icon" /> Loading...
-          </p>
-        </div>
-      </div>
-    );
-  }
 
+
+
+
+export const ProfileCard = ({ user }) => {
   const profilePicUrl = user.profilePic
-    ? `http://localhost:3000/${user.profilePic}`
+    ? `http://localhost:3000${user.profilePic}`
     : defaultProfilePic;
 
   return (

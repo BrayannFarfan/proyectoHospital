@@ -10,6 +10,7 @@ import { Doctors } from './Page/doctors/Doctors.jsx';
 import { Appointment } from './Page/appointment/Appointment.jsx';
 import { Profile } from './Page/DashboardPatient/Profile.jsx';
 import { DashboardPatient } from './Page/DashboardPatient/DashboardPatient.jsx';
+import { FavoriteDoctor } from './components/DasboardPatient/FavoriteDoctor.jsx';
 
 function App() {
 
@@ -26,8 +27,9 @@ function App() {
             <Route path='/forgot-password' element={<ForgotPass/>}  />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/our-pricing" element={< OurPricing/>} />
-            <Route path="/profile" element={< Profile/>} />
+            <Route path="/my-profile" element={< Profile/>} />
             <Route path="/dashboard-user" element={< DashboardPatient/>} />
+            <Route path="/favorites" element={< FavoriteDoctor/>} />
           </Routes>
     </>
   )

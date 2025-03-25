@@ -1,0 +1,105 @@
+/* src/components/ProfileForm.css */
+.profile-form-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .image-upload-section {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .image-preview {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 10px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .upload-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #2CB0A5;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  
+  .upload-button:hover {
+    background: #2CB0A5;
+  }
+  
+  .image-restrictions {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    width: 90%;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .form-group input::placeholder {
+    color: #aaa;
+  }
+  
+  .submit-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #2CB0A5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+  }

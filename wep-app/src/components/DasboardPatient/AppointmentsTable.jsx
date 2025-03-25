@@ -1,7 +1,8 @@
 // src/components/DasboardPatient/AppointmentsTable.jsx
 export const AppointmentsTable = ({ appointments }) => {
-  console.log('Citas recibidas en AppointmentsTable:', appointments);
 
+
+  
   return (
     <div className="appointments-table">
       <div className="table-header">
@@ -25,15 +26,24 @@ export const AppointmentsTable = ({ appointments }) => {
         <tbody>
           {appointments && appointments.length > 0 ? (
             appointments.map((appointment) => (
+              
               <tr key={appointment.id}>
-                <td>{appointment.medic.name || 'N/A'}</td>
-                <td className="appointment-date">{appointment.date ? new Date(appointment.date).toLocaleDateString("en-GB", {
-                    day: "2-digit",
-                    month: "short",
+                <td className="td-medic">
+                  Dr. 
+                  {appointment.medic.name || 'N/A'}
+                  <span className="appointment-specialty">{appointment.specialty.name}</span>
+                </td>
+                <td  >{appointment.date ? new Date(appointment.date).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
                     year:'numeric',
-                     timeZone: "UTC"
-                  }) : 'N/A'} <span className="appointment-time">{appointment.time || "N/A"}</span></td>
-                <td>{appointment.date ? new Date(appointment.date).toLocaleDateString() : 'N/A'}</td>
+                    timeZone: "UTC"
+                  }) : 'N/A'} <span className="appointment-time">{appointment.time.slice(0,5) || "N/A"}</span></td>
+                <td className="appointment-date">{appointment.date ? new Date(appointment.date).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                    year:'numeric',
+                  }) : 'N/A'}</td>
                 <td>{appointment.amount ? `$${appointment.amount}` : 'N/A'}</td>
                 <td className={`status-${appointment.status?.toLowerCase() || 'unknown'}`}>
                   {appointment.status || 'N/A'}

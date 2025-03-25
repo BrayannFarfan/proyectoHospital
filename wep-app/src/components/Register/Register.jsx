@@ -187,7 +187,7 @@ export const Register = () => {
               type="file"
               name="profilePic"
               onChange={handleFileChange}
-              accept="image/jpeg, image/png, image/gif, image/jpg" // Limitar tipos de archivos
+              accept="image/jpeg, image/png, image/gif, image/jpg"
               className="file-input"
             />
           </div>
