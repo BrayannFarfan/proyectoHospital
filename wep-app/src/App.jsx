@@ -11,6 +11,7 @@ import { Appointment } from './Page/appointment/Appointment.jsx';
 import { Profile } from './Page/DashboardPatient/Profile.jsx';
 import { DashboardPatient } from './Page/DashboardPatient/DashboardPatient.jsx';
 import { FavoriteDoctor } from './components/DasboardPatient/FavoriteDoctor.jsx';
+import { ChatContainer } from './Page/DashboardPatient/ChatContainer.jsx';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/my-profile" element={< Profile/>} />
             <Route path="/dashboard-user" element={< DashboardPatient/>} />
             <Route path="/favorites" element={< FavoriteDoctor/>} />
+            <Route path="/messages" element={<ChatContainer/>} />
           </Routes>
     </>
   )
