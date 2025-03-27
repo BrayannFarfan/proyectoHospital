@@ -7,6 +7,7 @@ import { MedicRouterRegister } from './routes/Medic.routes.js';
 import { AppointmentRouterRegister } from './routes/Appointment.routes.js';
 import { forgotPasswordSend } from './routes/ForgotPassword.routes.js';
 import { resetPasswordSend } from './routes/resetPasswordSend.routes.js';
+import { changePassworDashboard } from './routes/changePassword.routes.js';
 import { PatientRouterRegister } from './routes/Patient.routes.js'
 import  './config/config.js';
 import './models/index.js';
@@ -28,6 +29,7 @@ app.use('/medic', MedicRouterRegister)
 app.use('/appointment', AppointmentRouterRegister)
 app.use('/forgot-password', forgotPasswordSend);
 app.use('/reset-password', resetPasswordSend);
+app.use('/change-password', changePassworDashboard);
 app.use('/patient', PatientRouterRegister );
 
 app.listen(PORT , ()=>{

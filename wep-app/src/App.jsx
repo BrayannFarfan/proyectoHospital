@@ -12,6 +12,7 @@ import { Profile } from './Page/DashboardPatient/Profile.jsx';
 import { DashboardPatient } from './Page/DashboardPatient/DashboardPatient.jsx';
 import { FavoriteDoctor } from './components/DasboardPatient/FavoriteDoctor.jsx';
 import { ChatContainer } from './Page/DashboardPatient/ChatContainer.jsx';
+import { ResetPasswordChange } from './Page/DashboardPatient/ResetPasswordChange.jsx';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/dashboard-user" element={< DashboardPatient/>} />
             <Route path="/favorites" element={< FavoriteDoctor/>} />
             <Route path="/messages" element={<ChatContainer/>} />
+            <Route path="/change-password" element={<ResetPasswordChange/>} />
           </Routes>
     </>
   )

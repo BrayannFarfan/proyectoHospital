@@ -191,11 +191,6 @@ export const AuthProvider = ({children}) =>{
           throw new Error("No se encontró el ID del usuario. Por favor, inicia sesión nuevamente.");
         }
     
-        console.log("Datos enviados al backend:", formData);
-        if (profilePic) {
-          console.log("Imagen enviada:", profilePic);
-        }
-    
         const formDataToSend = new FormData();
         for (const key in formData) {
           formDataToSend.append(key, formData[key]);
@@ -205,22 +200,18 @@ export const AuthProvider = ({children}) =>{
         }
     
         try {
-          console.log("Haciendo solicitud al backend...");
           const response = await fetch(`http://localhost:3000/patient/${user.id}`, {
             method: "PUT",
             body: formDataToSend,
           });
     
-          console.log("Respuesta del backend:", response);
     
           if (!response.ok) {
             const errorData = await response.json();
-            console.log("Error del backend:", errorData);
             throw new Error(errorData.message || "Error al actualizar el perfil");
           }
     
           const data = await response.json();
-          console.log("Datos recibidos del backend:", data);
     
           const updatedUser = {
             ...user,
@@ -233,15 +224,41 @@ export const AuthProvider = ({children}) =>{
     
           return { success: true, message: "Perfil actualizado con éxito" };
         } catch (error) {
-          console.error("Error en updateProfile:", error);
           throw new Error(error.message || "Error al actualizar el perfil");
         }
       };
     
+    const changePasswordDash = async (data ,userId) =>{ 
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch('http://localhost:3000/change-password', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            currentPassword: data.currentPassword,
+            newPassword: data.newPassword,
+            userId: userId,
+          }),
+        });
+        const result = await response.json();
+        console.log(result);
+        
+        if (!response.ok) throw new Error(result.message || 'Reset password failed');
+        return result;
+      } catch (err) {
+        setError(err.message);
+        throw err;
+      }finally {
+        setLoading(false);
+      }
+
+    }
 
     return (
         <AuthContext.Provider
-            value={{login, user, logout, loading, error, register, forgotPassword, resetPassword ,getAppointment,appointments,updateProfile}}
+            value={{login, user, logout, loading, error, register, forgotPassword, resetPassword ,getAppointment,appointments,updateProfile , changePasswordDash}}
         >
 
             {children}
