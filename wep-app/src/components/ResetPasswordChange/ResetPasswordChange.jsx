@@ -1,4 +1,3 @@
-// src/components/ResetPasswordDash.jsx
 import { useState } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { InputContent } from "../ContainerInput/InputContent";
