@@ -29,10 +29,10 @@ Availability.belongsTo(Medic, { as: 'medic', foreignKey: 'MedicId' });
 
 
 // INICIALIZACIONES
-Medic.sync();
-Availability.sync();
 Specialties.sync();
-Appointment.sync();
+Medic.sync();
 Patient.sync();
+Appointment.sync();
+Availability.sync();
 
 

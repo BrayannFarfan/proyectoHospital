@@ -7,7 +7,7 @@ import { useAuth } from "../../context/AuthProvider";
 import './Dashboard.css';
 
 export const DashboardPatient = () => {
-  const { user, loading, getAppointment, appointments, error } = useAuth();
+  const { user, loading, getAppointment, appointments, message, setMessage, error } = useAuth();
 
   useEffect(() => {
  
@@ -16,6 +16,16 @@ export const DashboardPatient = () => {
       getAppointment(user.id);
     }
   }, [user, getAppointment]);
+
+
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage("");
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [message, setMessage]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -32,6 +42,8 @@ export const DashboardPatient = () => {
         <main className="dashboard-main">
           <div className="dashboard-content">
             <h1>Patient Dashboard</h1>
+            {message && <p className="message">{message}</p>}
+            {error && <p className="error">{error}</p>}
           </div>
           <StatsCards appointments={appointments} />
           <AppointmentsTable appointments={appointments} />

@@ -1,7 +1,11 @@
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
-
+import io from "socket.io-client";
 
 const AuthContext = createContext()
+
+const socket = io('http://localhost:3000',{
+  transports: ["websocket", "polling"],
+})
 
 export const AuthProvider = ({children}) =>{
     const [user, setUser] = useState(null);
@@ -9,6 +13,7 @@ export const AuthProvider = ({children}) =>{
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [appointments, setAppointments] = useState([]);
+    const [message, setMessage] = useState("");
 
 
     useEffect(() => {
@@ -77,7 +82,6 @@ export const AuthProvider = ({children}) =>{
             setLoading(false);
           }
     }
-
 
     const logout = async ( ) =>{
         setUser(null)
@@ -186,7 +190,7 @@ export const AuthProvider = ({children}) =>{
       }, []);
 
 
-      const updateProfile = async (formData, profilePic) => {
+    const updateProfile = async (formData, profilePic) => {
         if (!user?.id) {
           throw new Error("No se encontró el ID del usuario. Por favor, inicia sesión nuevamente.");
         }
@@ -256,9 +260,70 @@ export const AuthProvider = ({children}) =>{
 
     }
 
+  const confirmAppointment = async (appointmentId) => {
+    try {
+      const response = await fetch(`http://localhost:3000/appointment/${appointmentId}/confirm`,{
+        method:'PUT',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId:user.id })
+      })
+      const result = await response.json()
+      console.log(result);
+      
+      setMessage(result.message);
+    } catch (err) {
+      setMessage(err.result || "Error al confirmar la cita");
+    }
+  };
+
+  const rejectAppointment = async (appointmentId) => {
+    try {
+      const response = await fetch(`http://localhost:3000/appointment/${appointmentId}/reject`,{
+        method:'PUT',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId:user.id })
+      });
+      const result = await response.json()
+      console.log(result);
+      
+      setMessage(result.message);
+    } catch (err) {
+      console.error("Error al rechazar la cita:", err);
+      setMessage(err.message || "Error al rechazar la cita");
+    }
+  };
+
+  useEffect(() => {
+    if (!user) return;
+
+    socket.on("appointmentUpdated", (data) => {
+      const { appointmentId, status, patientId } = data;
+
+      if (patientId === user.id) {
+        setAppointments((prevAppointments) =>
+          prevAppointments.map((appointment) =>
+            appointment.id === appointmentId ? { ...appointment, status } : appointment
+          )
+        );
+        setMessage(`Cita ${status === "confirmed" ? "confirmada" : "rechazada"} con éxito`);
+      }
+    });
+
+    return () => {
+      socket.off("appointmentUpdated");
+    };
+  }, [user]);
+
+
+
+
     return (
         <AuthContext.Provider
-            value={{login, user, logout, loading, error, register, forgotPassword, resetPassword ,getAppointment,appointments,updateProfile , changePasswordDash}}
+            value={{login, user, logout, loading, error, register, forgotPassword, resetPassword ,getAppointment,appointments,updateProfile , changePasswordDash, confirmAppointment, rejectAppointment, message, setMessage}}
         >
 
             {children}

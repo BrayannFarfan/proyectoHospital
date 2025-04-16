@@ -56,7 +56,7 @@ export const updatePatient = async ( req, res ) =>{
       phone: req.body.phone,
       greenCard: req.body.greenCard,
       address: req.body.address,
-      profilePic: req.file ? `/uploads/users/${req.file.filename}` : patient.profilePic,
+      profilePic: req.file ? `uploads/users/${req.file.filename}` : patient.profilePic,
     };
     console.log("Datos a actualizar:", updatedData);
     await patient.update(updatedData);

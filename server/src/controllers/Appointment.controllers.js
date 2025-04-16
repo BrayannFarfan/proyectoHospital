@@ -107,3 +107,83 @@ export const deleteAppointment = async ( req, res ) =>{
         return res.status( 500 ).json({ message: error.message })
     }
 }
+
+export const corfirmAppointment =  async (req, res) => {
+    const { id } = req.params;
+    const { userId }   = req.body
+    
+    try {
+  
+      const appointment = await Appointment.findOne({
+        where: { id },
+        include: [{ model: Patient, as: "patient" }],
+      });
+  
+      if (!appointment) {
+        return res.status(404).json({ message: "Cita no encontrada" });
+      }
+
+      if (appointment.PatientId !== userId) {
+        return res.status(403).json({ message: "No tienes permiso para modificar esta cita" });
+      }
+  
+      if (appointment.status !== "pending") {
+        return res.status(400).json({ message: "La cita ya ha sido confirmada o rechazada" });
+      }
+  
+      appointment.status = "confirmed";
+      await appointment.save();
+  
+      req.io.emit("appointmentUpdated", {
+        appointmentId: appointment.id,
+        status: appointment.status,
+        patientId: appointment.PatientId,
+      });
+  
+      res.status(200).json({ message: "Cita confirmada con éxito" });
+    } catch (error) {
+      console.error("Error al confirmar la cita:", error);
+      res.status(500).json({ message: "Error al confirmar la cita" });
+    }
+}
+
+export const rejectAppointment = async (req, res) => {
+
+    const { id } = req.params;
+    const { userId }   = req.body
+
+    try {
+  
+      const appointment = await Appointment.findOne({
+        where: { id },
+        include: [{ model: Patient, as: "patient" }],
+      });
+  
+      if (!appointment) {
+        return res.status(404).json({ message: "Cita no encontrada" });
+      }
+  
+      if (appointment.PatientId !== userId) {
+        return res.status(403).json({ message: "No tienes permiso para modificar esta cita" });
+      }
+  
+      if (appointment.status !== "pending") {
+        return res.status(400).json({ message: "La cita ya ha sido confirmada o rechazada" });
+      }
+  
+      appointment.status = "rejected";
+      await appointment.save();
+  
+      // Emitir un evento WebSocket a todos los clientes conectados
+      req.io.emit("appointmentUpdated", {
+        appointmentId: appointment.id,
+        status: appointment.status,
+        patientId: appointment.PatientId,
+      });
+  
+      res.status(200).json({ message: "Cita rechazada con éxito" });
+    } catch (error) {
+      console.error("Error al rechazar la cita:", error);
+      res.status(500).json({ message: "Error al rechazar la cita" });
+    }
+  }

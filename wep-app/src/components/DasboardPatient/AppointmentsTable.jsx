@@ -1,8 +1,11 @@
-// src/components/DasboardPatient/AppointmentsTable.jsx
+import { useAuth } from "../../context/AuthProvider";
+
+
+
 export const AppointmentsTable = ({ appointments }) => {
 
-
-  
+  const { confirmAppointment, rejectAppointment } = useAuth();
+  // console.log("Citas recibidas:", appointments);
   return (
     <div className="appointments-table">
       <div className="table-header">
@@ -49,8 +52,22 @@ export const AppointmentsTable = ({ appointments }) => {
                   {appointment.status || 'N/A'}
                 </td>
                 <td>
-                  <button className="action-btn">Print</button>
-                  <button className="action-btn">View</button>
+                  {appointment.status === "pending" && (
+                    <>
+                      <button
+                        className="action-btn confirm-btn"
+                        onClick={() => confirmAppointment(appointment.id)}
+                      >
+                        Confirm
+                      </button>
+                      <button
+                        className="action-btn reject-btn"
+                        onClick={() => rejectAppointment(appointment.id)}
+                      >
+                        Reject
+                      </button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))

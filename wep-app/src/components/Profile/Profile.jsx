@@ -14,7 +14,7 @@ export const Profile = () => {
     let navigate = useNavigate();
     
     const profilePicUrl = user.profilePic
-    ? `http://localhost:3000${user.profilePic}`
+    ? `http://localhost:3000/${user.profilePic}`
     : 'http://localhost:3000/uploads/placeholder/placeholder.jpg';
     
     function   handleToggleDropdown () {

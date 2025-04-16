@@ -1,6 +1,6 @@
 import express from "express";
 export const AppointmentRouterRegister = express.Router();
-import { CreateAppointment, deleteAppointment, getAllAppointment, getOneAppointment, updateAppointment } from "../controllers/Appointment.controllers.js";
+import { CreateAppointment, deleteAppointment, getAllAppointment, getOneAppointment, updateAppointment, rejectAppointment, corfirmAppointment } from "../controllers/Appointment.controllers.js";
 
 //GET ONE DATE
 AppointmentRouterRegister.get('/:id', getOneAppointment);
@@ -16,3 +16,8 @@ AppointmentRouterRegister.put('/:id', updateAppointment);
 
 //DELETE DATE
 AppointmentRouterRegister.delete('/:id', deleteAppointment);
+
+//CONFIRM
+AppointmentRouterRegister.put("/:id/confirm", corfirmAppointment);
+//REJECT
+AppointmentRouterRegister.put("/:id/reject", rejectAppointment)

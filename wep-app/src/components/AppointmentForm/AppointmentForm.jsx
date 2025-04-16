@@ -180,7 +180,7 @@ export const AppointmentForm = () => {
 
   function onCloseSuccess() {
     setIsSuccessModal(false);
-    navigate('/');
+    navigate('/dashboard-user');
   }
 
   return (
@@ -305,7 +305,7 @@ export const AppointmentForm = () => {
         isOpen={isSuccessModalOpen}
         onClose={onCloseSuccess}
         title="Success Appointment"
-        message="Appointment booked successfully!"
+        message="Login to your control panel to confirm your appointment"
         primaryButtonText="Close"
       />
     </>

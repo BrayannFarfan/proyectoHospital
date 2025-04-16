@@ -26,7 +26,7 @@ export const Availability = db.define('Availability', {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Medic',
+        model: 'Medics',
         key: 'id',
       },
     },

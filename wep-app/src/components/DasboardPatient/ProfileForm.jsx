@@ -29,7 +29,7 @@ export const ProfileForm = () => {
 
   useEffect(() => {
     if (userData.profilePic) {
-      const imageUrl = `http://localhost:3000${userData.profilePic}`;
+      const imageUrl = `http://localhost:3000/${userData.profilePic}`;
       setImagePreview(imageUrl);
     }
   }, [user]);

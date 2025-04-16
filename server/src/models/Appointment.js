@@ -8,5 +8,10 @@ export const Appointment = db.define('appointment',{
     },
     time:{
         type: DataTypes.TIME
+    },
+    status: {
+      type: DataTypes.ENUM("pending", "confirmed", "rejected"),
+      allowNull: false,
+      defaultValue: "pending",
     }
 })

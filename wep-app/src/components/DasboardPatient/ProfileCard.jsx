@@ -5,7 +5,7 @@
 
 export const ProfileCard = ({ user }) => {
   const profilePicUrl = user.profilePic
-    ? `http://localhost:3000${user.profilePic}`
+    ? `http://localhost:3000/${user.profilePic}`
     : defaultProfilePic;
 
   return (

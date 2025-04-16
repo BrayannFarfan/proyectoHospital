@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LoginFailedModal } from '../LoginFailedModal/LoginFailedModal';
 import { useAuth } from '../../context/AuthProvider';
-import { Link, useNavigate } from 'react-router'; // Corregí 'react-router' a 'react-router-dom'
+import { Link, useNavigate } from 'react-router'; 
 import { InputContent } from "../ContainerInput/InputContent";
 import { WelcomeMessage } from "../WelcomeMessage/WelcomeMessage";
 
@@ -39,7 +39,7 @@ export const Register = () => {
 
   const onCloseSuccess = () => {
     setIsSuccessModal(false);
-    navigate('/');
+    navigate('/login-user');
   };
 
   const handleChange = (e) => {
@@ -52,7 +52,6 @@ export const Register = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    console.log('Selected file:', file);
     setFormData((prevData) => ({
       ...prevData,
       profilePic: file, 
@@ -78,15 +77,14 @@ export const Register = () => {
     const formDataToSend = new FormData();
     Object.keys(formData).forEach((key) => {
       if (key === 'profilePic' && formData[key]) {
-        console.log('Adding profilePic to FormData:', formData[key]);
-        formDataToSend.append(key, formData[key]); // Añadimos el archivo si existe
+        formDataToSend.append(key, formData[key]);
       } else {
-        formDataToSend.append(key, formData[key]); // Añadimos los demás campos
+        formDataToSend.append(key, formData[key]);
       }
     });
 
     try {
-      const success = await register(formDataToSend); // Enviamos FormData al contexto
+      const success = await register(formDataToSend); 
       if (success) {
         setIsSuccessModal(true);
       } else {
