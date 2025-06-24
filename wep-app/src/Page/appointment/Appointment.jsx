@@ -6,8 +6,6 @@ import { MakeAppointment } from "../../components/MakeAppointment/MakeAppointmen
 export const Appointment = () =>{
 
 
-
-
     return (
 
         <>

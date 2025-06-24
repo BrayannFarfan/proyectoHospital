@@ -4,7 +4,7 @@ const AppointmentContext = createContext();
 
 export const useAppointment = () => useContext(AppointmentContext);
 
-export const AppointmentProvider = ({ children }) => {
+export const AppointmentProvider = ({ children } = {}) => {
 
   const [patientId, setPatientId] = useState(null);
 
@@ -12,14 +12,13 @@ export const AppointmentProvider = ({ children }) => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     
-    if (user.id) {
-      setPatientId(user.id);
-    } else {
-      console.warn('No se encontró patientId en localStorage');
+    if (user?.id) {
+      setPatientId(user?.id);
     }
   }, []);
 
   const createAppointment = async (appointmentData) => {
+    
     try {
       const response = await fetch('http://localhost:3000/appointment', {
         method: 'POST',
@@ -29,12 +28,11 @@ export const AppointmentProvider = ({ children }) => {
         body: JSON.stringify(appointmentData),
       });
 
+      const data = await response.json();
       
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Error al crear la cita');
+        throw new Error(data.message || 'Error al crear la cita');
       }
-      const data = await response.json();
       return data;
     } catch (error) {
       throw error;

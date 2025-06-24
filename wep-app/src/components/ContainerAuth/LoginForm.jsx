@@ -81,7 +81,7 @@ export const LoginForm = () => {
                         Forgot Password?
                     </Link>
                 </div>
-                <button type="submit" disabled={loading}>
+                <button className="btn_login" type="submit" disabled={loading}>
                     {
                         loading ? 'Cargando....' : 'Sign in'
                     }                    

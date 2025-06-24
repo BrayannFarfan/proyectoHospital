@@ -13,15 +13,16 @@
     gap: .5rem;
   }
 .buttons-controllers{
-    /* display: flex; */
     gap: 7rem;
 }
-  
-  .date-button,
-  .time-button {
-    font-size: .6rem;
+ 
+  .date-button, .time-button{
+    padding: 0px 20px;
+    background: #1f645f82;
+    color: white;
+    border-radius: 5px;
+    border: none;
   }
-
   .date-button.selected,
   .time-button.selected {
     background-color: #1f645f;

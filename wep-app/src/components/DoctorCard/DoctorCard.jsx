@@ -15,6 +15,12 @@ const DoctorCard = ({ doctor }) => {
   const handleFavoriteToggle = () => {
     let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('You must log in first to add favorites.');
+      return;
+    }
+
     if (isFavorite) {
       favorites = favorites.filter((fav) => fav.id !== doctor.id);
     } else {
@@ -57,7 +63,7 @@ const DoctorCard = ({ doctor }) => {
         Book now
       </Link>
     </div>
-  </div>
+    </div>
   );
 };
 

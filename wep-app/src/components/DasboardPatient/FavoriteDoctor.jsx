@@ -40,20 +40,20 @@ export const FavoriteDoctor = () =>{
                     <div className="dashboard-content">
                         <h1>Favorites Doctors</h1>
                     </div>
-                    <div className="favorites-cards">
                         <div className="favorite-container-text">
                             {favoritesDoctor.length >0 && <p className="favorite-text">Favourite List</p>}
                         </div>
+                    <div className="doctors-grid">
                     {
                         favoritesDoctor.length === 0 ?
                         <div className="favorite-container-text">
                             <p className="favorite-message">There are no doctors</p> 
                         </div>
                         :
-                        favoritesDoctor.map((favorite,index ) =>{
+                        favoritesDoctor.map((favorite,index ) =>{                            
                             return(
-                                <div className="doctors-grid" key={index}>
-                                    <div className="doctor-card" > 
+
+                                    <div className="doctor-card" key={index}> 
                                     <Link to="/doctor-detail" className="container_doctor">
                                     <div className="doctor-image">
                                         <img src={`http://localhost:3000/${favorite.profilePic}`} alt={favorite.name} />
@@ -83,7 +83,6 @@ export const FavoriteDoctor = () =>{
                                     </Link>
                                     </div>
                                     </div>
-                                </div>
                             )}
                         )   
                     }

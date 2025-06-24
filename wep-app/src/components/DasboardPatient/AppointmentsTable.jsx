@@ -37,14 +37,14 @@ export const AppointmentsTable = ({ appointments }) => {
                   <span className="appointment-specialty">{appointment.specialty.name}</span>
                 </td>
                 <td  >{appointment.date ? new Date(appointment.date).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
+                    day: "2-digit",
+                    month: "short",
                     year:'numeric',
                     timeZone: "UTC"
                   }) : 'N/A'} <span className="appointment-time">{appointment.time.slice(0,5) || "N/A"}</span></td>
                 <td className="appointment-date">{appointment.date ? new Date(appointment.date).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
+                    day: "2-digit",
+                    month: "short",
                     year:'numeric',
                   }) : 'N/A'}</td>
                 <td>{appointment.amount ? `$${appointment.amount}` : 'N/A'}</td>

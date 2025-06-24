@@ -6,7 +6,7 @@ import DoctorData from './DoctorData';
 export const MostViewedDoctors = () => {
   const { loading, error , doctors} = useDoctor();
   const [currentPage, setCurrentPage] = useState(1);
-  const limit = 6;
+  const limit = 4;
 
   if (loading) return <p>Loading doctors...</p>;
   if (error) return <p>Error: {error}</p>;

@@ -70,12 +70,26 @@ export const AppointmentForm = () => {
   };
 
   const handleSpecialtyChange = (e) => {
-    const specialtyId = parseInt(e.target.value);
-    setSelectedSpecialty(specialties.find((s) => s.id === specialtyId));
-    setFormData((prev) => ({ ...prev, doctorId: '', date: null, time: null }));
-    setSelectedDate(null);
-    setAvailabilityByDate({});
-  };
+  const specialtyId = parseInt(e.target.value);
+  const newSpecialty = specialties.find((s) => s.id === specialtyId);
+  
+  setSelectedSpecialty(newSpecialty);
+
+  const firstDoctor = newSpecialty?.medics?.[0];
+  const doctorId = firstDoctor?.id || '';
+  const doctorFullName = firstDoctor ? `${firstDoctor.name} ${firstDoctor.lastName}` : '';
+
+  setFormData((prev) => ({
+    ...prev,
+    doctorId:'',
+    doctor: '',
+    date: null,
+    time: null
+  }));
+
+  setSelectedDate(null);
+  setAvailabilityByDate({});
+};
 
   const handleDoctorChange = (e) => {
     const doctorFullName = e.target.value;
@@ -88,7 +102,16 @@ export const AppointmentForm = () => {
     setAvailabilityByDate({});
   };
 
+      const formatDate = (date) => {
+      return new Date(date).toLocaleDateString('es-AR', {
+          day: '2-digit',
+          month: 'short',
+        }).replace(/ de /g, ' ');
+      };
+
   const handleDateSelect = (date) => {
+        const formattedDate = formatDate(date);
+    
     if (!availabilityByDate.message && Object.keys(availabilityByDate).length > 0) {
       setSelectedDate(date);
       setFormData((prev) => ({ ...prev, date: new Date(date), time: null }));
@@ -136,7 +159,7 @@ export const AppointmentForm = () => {
     }
 
     const appointmentData = {
-      date: formData.date.toISOString().split('T')[0],
+      date: formData.date.toISOString().split(' ')[0],
       time: convertTo24Hour(formData.time),
       specialtyId,
       PatientId: patientId,
@@ -262,7 +285,7 @@ export const AppointmentForm = () => {
                   onClick={() => handleDateSelect(date)}
                   className={`date-button ${selectedDate === date ? 'selected' : ''}`}
                 >
-                  {date}
+                  {formatDate(date)}
                 </button>
               ))}
             </div>
