@@ -4,14 +4,16 @@ import { BrowserRouter } from "react-router";
 import App from './App.jsx'
 import { AuthProvider } from './context/AuthProvider'
 import { DoctorProvider } from './context/DoctorProvider.jsx';
-
+import { AppointmentProvider } from './context/Appointment.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
         <DoctorProvider>
-          <App /> 
+          <AppointmentProvider>
+            <App /> 
+          </AppointmentProvider>
         </DoctorProvider>
       </AuthProvider>
     </BrowserRouter>

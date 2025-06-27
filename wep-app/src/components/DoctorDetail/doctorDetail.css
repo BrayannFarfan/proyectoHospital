@@ -1,0 +1,167 @@
+.detail_container {
+
+  padding: 2rem;
+  width: 70%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: 50% auto;
+  gap: 2rem;
+  grid-template-areas: 
+    "doctor-card doctor-card appointment-card"
+    "detail_doctor-resume detail_doctor-resume appointment-card";
+}
+
+.detail_doctor-card {
+  grid-area: doctor-card;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  height: fit-content;
+
+}
+p{
+  margin-bottom: .7rem;
+}
+.detail_doctor-info {
+  display: flex;
+  gap: 1rem;
+}
+
+.detail_doctor-photo {
+  width: 200px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+.detail_doctor-header{
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.detail_doctor-icons{
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.detail_doctor-name {
+  margin: 0;
+  font-size: 1.4rem;
+}
+.detail_doctor_share, .detail_doctor_heart{
+    color: #2CB0A5;
+    cursor: pointer;
+}
+.detail_doctor-specialty {
+  color: #808090;
+  margin: 0.3rem 0;
+  font-weight: 600;
+}
+
+.detail_doctor-description {
+  font-size: 0.9rem;
+  color: #808090;
+  margin-bottom:0;
+}
+.detail_doctor-location{
+  margin-top: 1rem;
+}
+.detail_map{
+  color: #2CB0A5;
+}
+.detail_link, .detail_phone{
+  text-decoration: none;
+  color: #2CB0A5;
+}
+.appointment-card {
+  grid-area: appointment-card;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.appointment-header{
+  background: #2CB0A5;
+  color: #fff;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.appointment-header h3{
+  padding: 1rem;
+  font-weight: bold;
+}
+
+
+.appointment-form-date.placeholder {
+  color: #2CB0A5; 
+  font-weight: bold;
+}
+
+.appointment-header p {
+  font-size: 0.85rem;
+  color: #fff;
+  padding: 1rem;
+  margin-top: -2rem;
+}
+.appointment-form-date, .appointment-form-time{
+  border: 1px solid #2CB0A5;
+  width: 80%;
+  margin: auto;
+  display: block;
+  padding: .7rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-bottom: .5rem;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  color: #2CB0A5;
+  font-weight: 600;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  background-color: #fff;
+  background-position-x: calc(100% - 10px);
+  cursor: pointer;
+}
+.appointment-form-date:focus,
+.appointment-form-time:focus {
+  border-color: #2CB0A5;
+  outline: none;
+  box-shadow: 0 0 0 2px (0, 123, 255, 0.2); 
+}
+
+.services p {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #2CB0A5;
+  padding: 1rem;
+}
+.services_comming_soon{
+  color: #d53a17;
+}
+.services label {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: .5rem;
+  margin: 1rem;
+}
+.services label span{
+  color: #2CB0A5;
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+.book-btn {
+  padding: 0.8rem;
+  background: #2CB0A5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.detail_doctor-resume{
+  grid-area: detail_doctor-resume;
+}

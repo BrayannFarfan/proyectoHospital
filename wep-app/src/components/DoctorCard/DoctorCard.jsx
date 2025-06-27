@@ -31,11 +31,13 @@ const DoctorCard = ({ doctor }) => {
     setIsFavorite(!isFavorite);
   };
 
-
+  const handleChangeDetail = () => {
+    
+  }
 
   return (
     <div className="doctor-card"> 
-    <Link to="/doctor-detail" className="container_doctor">
+    <Link to={`/doctor-detail/${doctor.id}`} className="container_doctor" onClick={handleChangeDetail}>
       <div className="doctor-image">
         <img src={`http://localhost:3000/${doctor.profilePic}`} alt={doctor.name} />
           <span className="heart-icon" onClick={(e) => { e.preventDefault(); handleFavoriteToggle(); }}>
@@ -56,7 +58,7 @@ const DoctorCard = ({ doctor }) => {
       </div>
     </Link>
     <div className="doctor_search">
-      <Link to="/doctors-map" className="doctor_map"> {/* Agregamos 'to' */}
+      <Link to="/doctors-map" className="doctor_map">
         <FaMapMarkerAlt /> View on map
       </Link>
       <Link to="/appointment" className="book-btn">

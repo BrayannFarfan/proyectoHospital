@@ -14,6 +14,7 @@ import { FavoriteDoctor } from './components/DasboardPatient/FavoriteDoctor.jsx'
 import { ChatContainer } from './Page/DashboardPatient/ChatContainer.jsx';
 import { ResetPasswordChange } from './Page/DashboardPatient/ResetPasswordChange.jsx';
 import { DoctorContainerDash } from './Page/DashboardPatient/DoctorContainer.jsx';
+import { Detail } from './Page/detail/Detail.jsx';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
             <Route path="/messages" element={<ChatContainer/>} />
             <Route path="/change-password" element={<ResetPasswordChange/>} />
             <Route path="/schedule-timing" element={<DoctorContainerDash/>} />
+            <Route path="/doctor-detail/:id" element={<Detail />} />
           </Routes>
     </>
   )

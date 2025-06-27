@@ -144,10 +144,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.2rem;
+    gap: 3rem;
   }
   .doctor_map{
     text-decoration: none;
     color: #666;
+    font-size: 0.9rem;
 
   }
   .doctor_map:hover{

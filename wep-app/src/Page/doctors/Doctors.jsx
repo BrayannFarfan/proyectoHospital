@@ -6,9 +6,6 @@ import { MostViewedDoctors } from '../../components/DoctorCard/MostViewedDoctors
 
 export  const Doctors = () => {
 
-
-
-
     return ( 
 
         <>
