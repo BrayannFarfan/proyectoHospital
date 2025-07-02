@@ -5,8 +5,8 @@
   margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-template-rows: 50% auto;
-  gap: 2rem;
+  grid-template-rows: auto auto;
+  gap: 1rem 2rem;
   grid-template-areas: 
     "doctor-card doctor-card appointment-card"
     "detail_doctor-resume detail_doctor-resume appointment-card";
@@ -78,6 +78,8 @@ p{
 .appointment-card {
   grid-area: appointment-card;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  height: fit-content;
+  align-self: start;
 }
 .appointment-header{
   background: #2CB0A5;
@@ -164,4 +166,682 @@ p{
 }
 .detail_doctor-resume{
   grid-area: detail_doctor-resume;
+}
+
+/* Estilos para las pestañas */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 0;
+}
+
+.tab-link {
+  display: inline-block;
+  padding: 20px;
+  background-color: #2CB0A5;
+  color: white;
+  text-decoration: none;
+  border-right: 1px solid white;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+  flex: 1;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.tab-link:first-child {
+  border-top-left-radius: 10px;
+}
+
+.tab-link:last-child {
+  border-right: none;
+  border-top-right-radius: 10px;
+}
+
+.tab-link:hover {
+  background-color: #258a80;
+  color: white;
+}
+
+.tab-link.active {
+  background-color: #2CB0A5;
+  color: #1a7069;
+  font-weight: 600;
+}
+
+/* Contenedor del contenido de las pestañas */
+.tab-content-container {
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 0 0 5px 5px;
+  min-height: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.tab-content {
+  animation: fadeIn 0.3s ease-in;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.tab-content h3 {
+  color: #2CB0A5;
+  margin-bottom: 1rem;
+}
+
+.tab-content p {
+  color: #666;
+  line-height: 1.6;
+  background-color: #ffffff;
+  /* padding: 1rem; */
+  border-radius: 6px;
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Overview Styles */
+.overview-section {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.info-card {
+  /* padding: .5rem; */
+  border-radius: 8px;
+}
+
+.info-card h4 {
+  color: #2CB0A5;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.info-card p {
+  color: #666;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Educational Background List Styles */
+.info-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+}
+
+.info-card li {
+  background-color: #f8fffe;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  border-left: 4px solid #2CB0A5;
+  color: #555;
+  position: relative;
+  padding-left: 2.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.info-card li:hover {
+  background-color: #e6f7f5;
+  transform: translateX(5px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.info-card li::before {
+  content: '🎓';
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+}
+
+.info-card li:last-child {
+  margin-bottom: 0;
+}
+
+/* Accordion Styles */
+.accordion-container {
+  margin-top: 1rem;
+}
+
+.accordion-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.accordion-item:last-child {
+  margin-bottom: 0;
+}
+
+.accordion-header {
+  background-color: #f8fffe;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.accordion-header:hover {
+  background-color: #e6f7f5;
+}
+
+.accordion-header h4 {
+  margin: 0;
+  color: #2CB0A5;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.accordion-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.service-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2CB0A5;
+}
+
+.accordion-icon {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2CB0A5;
+  transition: transform 0.3s ease;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(44, 176, 165, 0.1);
+}
+
+.accordion-icon.open {
+  transform: rotate(45deg);
+  background-color: #2CB0A5;
+  color: white;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background-color: white;
+}
+
+.accordion-content.open {
+  max-height: 200px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.accordion-content p {
+  padding: 1rem 1.5rem 0.5rem 1.5rem;
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+.accordion-content p:last-child {
+  padding-bottom: 1rem;
+}
+
+.accordion-content p strong {
+  color: #333;
+}
+
+/* Experience Styles - Updated to match Overview */
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.experience-header h4 {
+  color: #2CB0A5;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.experience-period {
+  background-color: #2CB0A5;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.experience-location {
+  color: #2CB0A5;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.experience-description {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Location Styles - Simple version */
+.location-section-simple {
+  display: grid;
+  gap: 2rem;
+}
+
+/* Map Styles - Simple version */
+.map-container-simple {
+  margin-bottom: 2rem;
+}
+
+.map-container-simple h4 {
+  color: #2CB0A5;
+  margin-bottom: 1rem;
+}
+
+.map-wrapper {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.map-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Hospital Info - Simple version */
+.clinic-info-simple {
+  margin-top: 1rem;
+}
+
+.clinic-info-simple h4 {
+  color: #2CB0A5;
+  margin-bottom: 1rem;
+}
+
+/* Contact Details with Icons */
+.clinic-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.clinic-detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.detail-icon {
+  font-size: 1.2rem;
+  min-width: 20px;
+  color: #2CB0A5;
+  flex-shrink: 0;
+}
+
+.clinic-info, .schedule-info, .additional-locations, .insurance-info {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #2CB0A5;
+}
+
+.clinic-info h4, .schedule-info h4, .additional-locations h4, .insurance-info h4 {
+  color: #2CB0A5;
+  margin-bottom: 1rem;
+}
+
+.clinic-details p {
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.schedule-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.schedule-day {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+}
+
+.day {
+  font-weight: 600;
+  color: #333;
+}
+
+.hours {
+  color: #2CB0A5;
+  font-weight: 500;
+}
+
+.location-item {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  border: 1px solid #e0e0e0;
+}
+
+.location-item h5 {
+  color: #2CB0A5;
+  margin-bottom: 0.5rem;
+}
+
+.location-item p {
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.insurance-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.insurance-info li {
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  color: #666;
+  text-align: center;
+}
+
+/* Reviews Styles - New Design */
+.reviews-new-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.doctor-name-review {
+  color: #2CB0A5;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.rating-summary-container {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+/* Left side - Rating info */
+.rating-info-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rating-value-box {
+  background-color: #2CB0A5;
+  color: white;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(44, 176, 165, 0.3);
+}
+
+.rating-number-large {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.stars-display {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.star-filled {
+  color: #ffc107;
+  font-size: 1.5rem;
+}
+
+.star-empty {
+  color: #ddd;
+  font-size: 1.5rem;
+}
+
+.star-half {
+  color: #ffc107;
+  font-size: 1.5rem;
+}
+
+.review-summary-text {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+  text-align: center;
+}
+
+/* Right side - Rating breakdown bars */
+.rating-breakdown-new {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 300px;
+}
+
+.rating-bar-new {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.rating-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 60px;
+}
+
+.star-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  min-width: 15px;
+}
+
+.star-icon-small {
+  color: #ffc107;
+  font-size: 1rem;
+}
+
+.bar-container {
+  flex: 1;
+  height: 12px;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  background-color: #2CB0A5;
+  border-radius: 6px;
+  transition: width 0.3s ease;
+  min-width: 2px;
+}
+
+.count-label {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* Reviews list */
+.reviews-list-new {
+  margin-top: 1rem;
+}
+
+.reviews-list-new h4 {
+  color: #2CB0A5;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.review-item-new {
+  padding: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Top section - Photo and Stars */
+.review-top-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.reviewer-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #2CB0A5;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.review-rating-new {
+  display: flex;
+  gap: 0.25rem;
+}
+
+/* Middle section - Name and Date */
+.review-middle-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 66px; /* Align with content after avatar */
+}
+
+.reviewer-name-new {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.review-date-new {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+/* Bottom section - Comment */
+.review-comment-new {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  margin-left: 66px; /* Align with content after avatar */
+  font-size: 0.95rem;
+}
+
+/* Divider line */
+.review-divider {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+/* Submit Review Button */
+.submit-review-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e0e0e0;
+}
+
+.submit-review-btn {
+  background-color: #2CB0A5;
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(44, 176, 165, 0.2);
+  display: inline-block;
+}
+
+.submit-review-btn:hover {
+  background-color: #258a80;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(44, 176, 165, 0.3);
+  color: white;
+  text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .reviews-summary {
+    grid-template-columns: 1fr;
+  }
+  
+  .rating-display {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .review-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .reviews-actions {
+    flex-direction: column;
+  }
 }

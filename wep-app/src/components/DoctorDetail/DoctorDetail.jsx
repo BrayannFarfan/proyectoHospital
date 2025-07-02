@@ -1,26 +1,15 @@
 import "./doctorDetail.css";
 import { DoctorDetailAppointment } from "./DoctorDetailAppointment.jsx";
 import { DoctorDetailCard } from "./DoctorDetailCard.jsx";
+import DoctorResumeDetail from "./DoctorResumeDetail.jsx";
 
 const DoctorDetail = () => {
-   
   return (
     <div className="detail_container">
-
-        <DoctorDetailCard/>
-
-       <div className="detail_doctor-resume">
-         <div className="tabs">
-          <button>Overview</button>
-          <button>Experience</button>
-          <button>Location</button>
-          <button>Reviews</button>
-        </div>
-      </div>
-
-      <DoctorDetailAppointment/>
+      <DoctorDetailCard />
+      <DoctorResumeDetail />
+      <DoctorDetailAppointment />
     </div>
-    
   );
 };
 
