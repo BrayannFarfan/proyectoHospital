@@ -1,18 +1,50 @@
 import { useAuth } from "../../context/AuthProvider";
-
-
+import { useState, useMemo } from "react";
+import { isToday, isUpcoming, isPast, formatDateForDisplay } from "../../utils/dateUtils";
 
 export const AppointmentsTable = ({ appointments }) => {
-
+  const [activeFilter, setActiveFilter] = useState("upcoming");
   const { confirmAppointment, rejectAppointment } = useAuth();
-  // console.log("Citas recibidas:", appointments);
+
+  // Filtrar citas basado en la fecha actual
+  const filteredAppointments = useMemo(() => {
+    if (!appointments || appointments.length === 0) return [];
+    
+    return appointments.filter(appointment => {
+      if (activeFilter === "today") {
+        return isToday(appointment.date);
+      } else if (activeFilter === "upcoming") {
+        return isUpcoming(appointment.date);
+      } else if (activeFilter === "past") {
+        return isPast(appointment.date);
+      }
+      return true;
+    });
+  }, [appointments, activeFilter]);
   return (
     <div className="appointments-table">
       <div className="table-header">
         <h3>Doctors Appointment</h3>
         <div className="table-actions">
-          <span>Upcoming</span>
-          <button>Today</button>
+          <span 
+            className={activeFilter === "upcoming" ? "active-filter" : "filter-option"}
+            onClick={() => setActiveFilter("upcoming")}
+            style={{ cursor: "pointer" }}
+          >
+            Upcoming
+          </span>
+          <button 
+            className={activeFilter === "today" ? "active-filter" : "filter-option"}
+            onClick={() => setActiveFilter("today")}
+          >
+            Today
+          </button>
+          <button 
+            className={activeFilter === "past" ? "active-filter" : "filter-option"}
+            onClick={() => setActiveFilter("past")}
+          >
+            Past
+          </button>
         </div>
       </div>
       <table>
@@ -27,10 +59,10 @@ export const AppointmentsTable = ({ appointments }) => {
           </tr>
         </thead>
         <tbody>
-          {appointments && appointments.length > 0 ? (
-            appointments.map((appointment) => (
+          {filteredAppointments && filteredAppointments.length > 0 ? (
+            filteredAppointments.map((appointment) => (
               
-              <tr key={appointment.id}>
+              <tr key={appointment.id} className={activeFilter === "past" ? "past-appointment" : ""}>
                 <td className="td-medic">
                   Dr. 
                   {appointment.medic.name || 'N/A'}
@@ -52,7 +84,7 @@ export const AppointmentsTable = ({ appointments }) => {
                   {appointment.status || 'N/A'}
                 </td>
                 <td>
-                  {appointment.status === "pending" && (
+                  {appointment.status === "pending" && activeFilter !== "past" && (
                     <>
                       <button
                         className="action-btn confirm-btn"
@@ -67,6 +99,9 @@ export const AppointmentsTable = ({ appointments }) => {
                         Reject
                       </button>
                     </>
+                  )}
+                  {activeFilter === "past" && (
+                    <span className="past-label">Completed</span>
                   )}
                 </td>
               </tr>

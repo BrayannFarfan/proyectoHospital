@@ -159,7 +159,7 @@ export const AppointmentForm = () => {
     }
 
     const appointmentData = {
-      date: formData.date.toISOString().split(' ')[0],
+      date: formData.date.toISOString().split('T')[0], // Formato YYYY-MM-DD
       time: convertTo24Hour(formData.time),
       specialtyId,
       PatientId: patientId,

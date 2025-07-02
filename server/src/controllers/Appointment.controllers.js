@@ -32,13 +32,31 @@ export const getOneAppointment = async ( req , res ) =>{
     }
 }
 
-export const getAllAppointment = async ( req , res ) =>{
+export const getAllAppointment = async ( req , res ) => {
 
 try {
-    const getAllAppointment  = await Appointment.findAll();
+    const getAllAppointment  = await Appointment.findAll({
+        include: [
+            {
+                model: Patient,
+                as: 'patient',
+                attributes: ['id', 'name', 'lastName']
+            },
+            {
+                model: Medic,
+                as: 'medic',
+                attributes: ['id', 'name', 'lastName']
+            },
+            {
+                model: Specialties,
+                as: 'specialty',
+                attributes: ['id', 'name']
+            }
+        ]
+    });
     return res.status( 200 ).json({ data : getAllAppointment })
 } catch ( error ) {
-    return res.status( 500 ).json({ message: error })
+    return res.status( 500 ).json({ message: error.message })
 }
 }
 

@@ -13,7 +13,7 @@ export const DoctorContainerDash = ( ) =>{
                 <Sidebar />
                 <main className="dashboard-main">
                   <div className="dashboard-content">
-                    <h1>Reset Password</h1>
+                    <h1>Calendar</h1>
                   </div>
                   <DoctorSchedule/>
                 </main>

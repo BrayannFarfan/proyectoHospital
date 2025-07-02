@@ -4,7 +4,7 @@ import { DataTypes } from 'sequelize';
 
 export const Appointment = db.define('appointment',{
     date:{
-        type: DataTypes.DATE
+        type: DataTypes.DATEONLY // Solo fecha, sin hora
     },
     time:{
         type: DataTypes.TIME
@@ -14,4 +14,7 @@ export const Appointment = db.define('appointment',{
       allowNull: false,
       defaultValue: "pending",
     }
+}, {
+    timestamps: true, // Incluir createdAt y updatedAt
+    tableName: 'appointments'
 })
